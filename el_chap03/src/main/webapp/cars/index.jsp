@@ -24,7 +24,7 @@
 					차량유형 : <%=car.getType() %> 
 				</li>
 				<li>
-					스포츠 모드 탑재 여부 : <%=car.get %>
+					스포츠 모드 탑재 여부 : <%=car.isSportsMode() %>
 				</li>
 			</ul>
 		</div>
