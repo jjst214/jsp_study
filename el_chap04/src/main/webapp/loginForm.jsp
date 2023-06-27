@@ -12,7 +12,7 @@
 		//로그인 상태 확인 - 로그아웃 상태 일 때
 		if(session.getAttribute("UserId") == null){
 			%>
-			<form action="loginprocess.jsp" method="post">
+			<form action="loginprocess2.jsp" method="post">
 				<p>아이디 : <input type="text" name="id"/></p>
 				<p>패스워드 : <input type="password" name="pwd"/></p>
 				<p><input type="submit" value="로그인"/></p>
@@ -26,9 +26,6 @@
 			</p>
 			<%
 		}
-		
-		
-		
 	%>
 </body>
 </html>
