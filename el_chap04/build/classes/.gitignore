@@ -1,2 +1,8 @@
 /common/
 /membership/
+/BookDTO.class
+/books/
+/BookDAO.class
+/JDBCConnect.class
+/book/
+/board/

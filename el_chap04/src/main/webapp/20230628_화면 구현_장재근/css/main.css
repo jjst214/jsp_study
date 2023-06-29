@@ -1,0 +1,85 @@
+@charset "UTF-8";
+*{margin:0; padding:0; box-sizing:none;}
+li{list-style:none;}
+a{text-decoration:none; color:#000;}
+#header{
+	width:100%;
+	height:50px;
+	background-color:#fff;
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+}
+#header h2{
+	padding:0 10px;
+}
+#header_sub{
+	display:flex;
+	align-items:center;
+}
+#header_sub li{
+	padding:0 5px;
+}
+#header_sub li:last-child{
+	margin-right:10px;
+}
+
+#wrap{
+	width:100%;
+	height:800px;
+	background-color:#ccc;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items:center;
+}
+#content{
+	width:100%;
+	max-width:1200px;
+	border-bottom:1px solid #fff;
+}
+#content h3{
+	padding:30 0px;
+	line-height:50px;
+	border-bottom:1px solid #fff;
+}
+#content #list{
+	display:flex;
+}
+#content #list tbody{
+	width:100%;
+}
+#content #list tbody tr{
+	width:1200px;
+	border-bottom:1px solid #fff;
+}
+#content #list td{
+	width:200px;
+	line-height:25px;
+}
+#insert_form{
+	width:100%;
+	max-width:1200px;
+}
+#insert_form h3{
+	padding: 15px 0;
+	border-bottom:1px solid #fff;
+	margin-bottom:20px;
+}
+#insert_form p{
+	width: 100%;
+	padding: 5px 0;
+	border-bottom:1px solid #fff;
+}
+#insert_form span{
+	display:inline-block;
+	width:250px;
+	height:20px;
+}
+#insert_form p:last-child input{
+	padding:3px;
+	margin:0 5px;
+}
+
+
+
