@@ -41,12 +41,10 @@
 			<input type="submit" value="검색"/>
 		</form>
 	</div>
-	<form>
 	<table>
 		<tr>
 			<td>글번호</td>
 			<td>제목</td>
-			<td>내용</td>
 			<td>아이디</td>
 			<td>게시일자</td>
 			<td>조회수</td>
@@ -64,7 +62,6 @@
 		<tr>
 			<td><%=dto.getNum() %></td>
 			<td><a href="boardView.jsp?num=<%=dto.getNum()%>"><%=dto.getTitle() %></a></td>
-			<td><%=dto.getContent() %></td>
 			<td><%=dto.getId() %></td>
 			<td><%=dto.getPostdate() %></td>
 			<td><%=dto.getVisitcount() %></td>
@@ -74,6 +71,12 @@
 	}
 	%>
 	</table>
-	</form>
+	<div>
+		<button onclick="location.href='boardwrite.jsp'">글쓰기</button>
+	</div>
+	<div>
+		
+	</div>
+	
 </body>
 </html>
