@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<booklist>
+	<book>
+		<name>사피엔스</name>
+		<author>유발하라리</author>
+		<price>19800</price>
+	</book>
+	<book>
+		<name>재미있는JSP</name>
+		<author>그린</author>
+		<price>28000</price>
+	</book>
+</booklist>
