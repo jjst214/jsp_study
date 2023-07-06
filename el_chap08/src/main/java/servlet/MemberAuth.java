@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import member.MemberDAO;
 import member.MemberDTO;
-
 public class MemberAuth extends HttpServlet {
 	MemberDAO dao;
 	
