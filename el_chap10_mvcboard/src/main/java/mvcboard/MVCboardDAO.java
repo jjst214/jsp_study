@@ -86,7 +86,7 @@ public class MVCboardDAO extends JDBCConnect {
 	}
 	
 	//게시글 상세보기
-	public MVCboardDTO viewBoard(String idx) {
+	public MVCboardDTO selectView(String idx) {
 		MVCboardDTO dto = new MVCboardDTO();
 		String sql = "select * from mvcboard where idx = ?";
 		try {
@@ -110,4 +110,76 @@ public class MVCboardDAO extends JDBCConnect {
 		
 		return dto;
 	}
+	//조회수 증가
+	public void updateVisitcount(String idx) {
+		
+		String query = "update mvcboard set visitcount=visitcount+1 where idx=?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, idx);
+			psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	//삭제시 입력한 비밀번호가 게시물의 비밀번호와 일치하는지 확인
+	public boolean confirmPassword(String pass, String idx) {
+		boolean isCorr = true;
+		String query = "select count(*) from mvcboard where pass=? and idx=?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, pass);
+			psmt.setString(2, idx);
+			rs = psmt.executeQuery();
+			rs.next();
+			if(rs.getInt(1) == 0) {
+				isCorr = false;
+			}
+		} catch (SQLException e) {
+			isCorr = false;
+			e.printStackTrace();
+		}
+		return isCorr;
+	}
+	//게시물 삭제하기
+	public int deletePost(String idx) {
+		int result = 0;
+		String query = "delete from mvcboard where idx = ?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, idx);
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	//게시물 수정하기
+	public int updatePost(MVCboardDTO dto) {
+		int result = 0;
+		String query = "update mvcboard set title=?, name=?, content=?"
+				+ ", ofile=?, sfile=? where idx=? and pass=?";
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getName());
+			psmt.setString(3, dto.getContent());
+			psmt.setString(4, dto.getOfile());
+			psmt.setString(5, dto.getSfile());
+			psmt.setString(6, dto.getIdx());
+			psmt.setString(7, dto.getPass());
+			
+			result = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 }
+
