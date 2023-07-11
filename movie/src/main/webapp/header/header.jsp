@@ -4,33 +4,55 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../css/header.css">
-<link rel="stylesheet" href="../css/footer.css">
-<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> 
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/footer.css">
 
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+
 <title>Insert title here</title>
 </head>
 <body>
 	<header>
-		<div>
-			<h1>로고</h1>
+		<div id="top_nav">
+			<h1><a href="#">로고</a></h1>
 			<p><input type="text"/></p>
 			<ul>
-				<li>로그인/로그아웃</li>
-				<li>회원가입/회원정보</li>
-				<li>마이페이지</li>
+				<%
+				if(session.getAttribute("UserName") != null){
+					//유저네임 세션이 있다면?  1:일반유저, 2:관리자
+					if(session.getAttribute("grade").equals("1")){
+						%>
+						<li><a href="#">로그아웃</a></li>
+						<li><a href="#">회원정보</a></li>
+						<li><a href="#">마이페이지</a></li>
+						<%
+					}else{
+						%>
+						<li><a href="#">로그아웃</a></li>
+						<li><a href="#">상품등록</a></li>
+						<%
+					}
+					
+				}else{
+					%>
+						<li><a href="#">로그인</a></li>
+						<li><a href="#">회원가입</a></li>
+					<%
+				}
+				%>
+				<li><a href="mvc_con/add.do">등록</a></li>
 			</ul>
 		</div>
-		<div>
+		<nav id="nav_menu">
 			<ul>
-				<li>축구화</li>
-				<li>유니폼</li>
-				<li>용품</li>
-				<li>QnA</li>
-				<li>구매후기</li>
+				<li><a href="#">축구화</a></li>
+				<li><a href="#">유니폼</a></li>
+				<li><a href="#">용품</a></li>
+				<li><a href="#">구매후기</a></li>
+				<li><a href="#">QnA</a></li>
 			</ul>
-		</div>
+		</nav>
 	</header>
+	

@@ -39,7 +39,7 @@ public class WriteController extends HttpServlet {
 		dto.setContent(mr.getParameter("content"));
 		dto.setPass(mr.getParameter("pass"));
 		
-		//원본 파일명과 저장도니 파일 이름 설정
+		//원본 파일명과 저장된 파일 이름 설정
 		String fileName = mr.getFilesystemName("ofile");
 		if(fileName != null) {
 			String now = new SimpleDateFormat("yyyyMMdd_HmsS").format(new Date());
