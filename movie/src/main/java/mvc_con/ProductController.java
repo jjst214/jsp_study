@@ -40,31 +40,24 @@ public class ProductController extends HttpServlet {
 		dto.setPstock(mr.getParameter("stock"));
 		dto.setPdetail(mr.getParameter("detail"));
 		
-		String file1 = mr.getFilesystemName("file1");
-		String file2 = mr.getFilesystemName("file2");
-		if(file1 != null && file2 != null) {
-			String now = new SimpleDateFormat("yyyyMMdd_HmsS").format(new Date());
-			String file1_ext = file1.substring(file1.lastIndexOf("."));
-			String file2_ext = file2.substring(file2.lastIndexOf("."));
-			String newFileName1 = "thumb_" + now + file1_ext;
-			String newFileName2 = "detail_" + now + file2_ext;
+		String file = mr.getFilesystemName("file1");
+		if(file != null) {
+			String now = new SimpleDateFormat("yyMMdd_HmsS").format(new Date());
+			String file_ext = file.substring(file.lastIndexOf("."));
+			String newFileName = "product_" + now + file_ext;
 			
-			File oFile1 = new File(saveDirectory + File.separator + file1);
-			File oFile2 = new File(saveDirectory + File.separator + file2);
-			File nFile1 = new File(saveDirectory + File.separator + newFileName1);
-			File nFile2 = new File(saveDirectory + File.separator + newFileName2);
-			oFile1.renameTo(nFile1);
-			oFile2.renameTo(nFile2);
+			File oFile = new File(saveDirectory + File.separator + file);
+			File nFile = new File(saveDirectory + File.separator + newFileName);
+			oFile.renameTo(nFile);
 			
-			dto.setPimage1(newFileName1);
-			dto.setPimage2(newFileName2);
+			dto.setPimage(newFileName);
 		}
 		ProductDAO dao = new ProductDAO();
 		int result = dao.addProduct(dto);
 		dao.close();
 		
 		if(result == 1) {
-			resp.sendRedirect("index.jsp");
+			resp.sendRedirect("../index.jsp");
 		}else {
 			resp.sendRedirect("add.do");
 		}

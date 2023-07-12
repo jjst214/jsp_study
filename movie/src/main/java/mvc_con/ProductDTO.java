@@ -6,8 +6,7 @@ public class ProductDTO {
 	private String pname;
 	private String pprice;
 	private String pstock;
-	private String pimage1;
-	private String pimage2;
+	private String pimage;
 	private String pdetail;
 	private String prdate;
 	private String phit;
@@ -37,17 +36,11 @@ public class ProductDTO {
 	public void setPstock(String pstock) {
 		this.pstock = pstock;
 	}
-	public String getPimage1() {
-		return pimage1;
+	public String getPimage() {
+		return pimage;
 	}
-	public void setPimage1(String pimage1) {
-		this.pimage1 = pimage1;
-	}
-	public String getPimage2() {
-		return pimage2;
-	}
-	public void setPimage2(String pimage2) {
-		this.pimage2 = pimage2;
+	public void setPimage(String pimage1) {
+		this.pimage = pimage1;
 	}
 	public String getPdetail() {
 		return pdetail;

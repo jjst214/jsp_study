@@ -11,6 +11,8 @@ $( document ).ready( function() {
 		arrows: false,
 		dragging:true
 	});
+	
+	
 });
 
 

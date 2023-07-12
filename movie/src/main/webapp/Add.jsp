@@ -60,12 +60,8 @@
 				<td><textarea name="detail"></textarea></td>
 			</tr>
 			<tr>
-				<td>상품 썸네일 사진</td>
+				<td>상품 사진</td>
 				<td><input type="file" name="file1"/></td>
-			</tr>
-			<tr>
-				<td>상품대표사진</td>
-				<td><input type="file" name="file2"/></td>
 			</tr>
 			<tr>
 				<td colspan="2">
