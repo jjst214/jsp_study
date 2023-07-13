@@ -5,6 +5,9 @@ li{list-style:none}
 #wrap{
 	width:100%;
 }
+.non-cursor{
+	cursor: default;
+}
 .inner{
 	max-width:1200px;
 	margin:0 auto;
@@ -56,4 +59,8 @@ span{font-size:14px;}
 	height:30px;
 	border:1px solid #ccc;
 	margin-top:5px;
+}
+strong{
+	line-height:30px;
+	color:gray;
 }

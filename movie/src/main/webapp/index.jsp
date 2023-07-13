@@ -1,3 +1,4 @@
+<%@page import="org.apache.catalina.Session"%>
 <%@page import="mvc_con.ProductDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="mvc_con.ListDAO"%>
@@ -7,11 +8,13 @@
 
 <%@ include file="/header/header.jsp" %>
 <%
+	request.setCharacterEncoding("utf-8");
 	ListDAO dao = new ListDAO();
 	List<ProductDTO> lists = dao.selectListPage();
 	
 	dao.close();
 	String url = request.getServletContext().getRealPath("/uploads/");
+	
 %>
 <div id="wrap">
 	<section>
@@ -23,7 +26,8 @@
 			<div><a href="#"><img src="images/mainSlide7.jpg"></a></div>
 		</div>
 	</section>
-	<div class="text inner"><h2>신상품</h2><span><a href="/mvc_con/list.do">더 보기</a></span></div>
+	
+	<div class="text inner"><h2 class="non-cursor">신상품</h2><span><a href="/mvc_con/list.do">더 보기</a></span></div>
 	<section id="product1" class="inner">
 	<c:set var="lists" value="<%=lists%>" />
 	<c:set var="savedir" value="<%=url %>" />
@@ -49,13 +53,3 @@
 	</section>
 </div>	
 <%@ include file="/footer/footer.jsp" %>
-
-	<div>
-		<form>
-			<input type="text" id="sample6_postcode" placeholder="우편번호">
-			<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-			<input type="text" id="sample6_address" placeholder="주소"><br>
-			<input type="text" id="sample6_detailAddress" placeholder="상세주소">
-			<input type="text" id="sample6_extraAddress" placeholder="참고항목">
-		</form>
-	</div>
