@@ -2,7 +2,6 @@ package member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,14 +29,10 @@ public class LoginController extends HttpServlet {
 		
 		if(dto.getmID() != null) {
 			//로그인이 성공했을 경우 세션에 저장하기위해 UserId값과 관리자와 일반고객을 분류할 Grade를 셋팅 (1:일반고객, 10:관리자)
-			HttpSession sessionId = req.getSession();
-			HttpSession grade = req.getSession();
-			sessionId.setAttribute("UserId", dto.getmID());
-			if(dto.getmGRADE().equals("1")) {
-				grade.setAttribute("Grade", "1");
-			}else {
-				grade.setAttribute("Grade", "10");
-			}
+			HttpSession session = req.getSession();
+			session.setAttribute("UserId", dto.getmID());
+			session.setAttribute("Grade", dto.getmGRADE());
+			
 			resp.sendRedirect(req.getContextPath()+"/index.jsp");
 		}else {
 			PrintWriter wr = resp.getWriter();

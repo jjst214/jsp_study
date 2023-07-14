@@ -9,26 +9,26 @@ import common.JDBCConnect;
 public class MemberDAO extends JDBCConnect{
 	
 	//아이디와 패스워드에 일치하는 회원정보를 반환
-	public MemberDTO getMemberDTO(String id, String pass) {
-		MemberDTO dto = new MemberDTO();
-		String sql = "select * from member where id = ? and pass = ?";
-		try {
-			psmt = con.prepareStatement(sql);
-			psmt.setString(1, id);
-			psmt.setString(2, pass);
-			rs = psmt.executeQuery();
-			if(rs.next()) {
-				dto.setId(rs.getString("id"));
-				dto.setPass(rs.getString("pass"));
-				dto.setName(rs.getString("name"));
-				dto.setRegidate(rs.getString("regidate"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return dto;
-	}
+//	public MemberDTO getMemberDTO(String id, String pass) {
+//		MemberDTO dto = new MemberDTO();
+//		String sql = "select * from member where id = ? and pass = ?";
+//		try {
+//			psmt = con.prepareStatement(sql);
+//			psmt.setString(1, id);
+//			psmt.setString(2, pass);
+//			rs = psmt.executeQuery();
+//			if(rs.next()) {
+//				dto.setId(rs.getString("id"));
+//				dto.setPass(rs.getString("pass"));
+//				dto.setName(rs.getString("name"));
+//				dto.setRegidate(rs.getString("regidate"));
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return dto;
+//	}
 	//회원추가하기
 	public int insertMember(MemberDTO dto) {
 		int inResult = 0;

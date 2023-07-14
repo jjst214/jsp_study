@@ -1,0 +1,16 @@
+@charset "UTF-8";
+form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+table {
+	margin: 30px 0;
+	border: 1px solid #333;
+}
+table td {
+	padding: 10px;
+}
+.phone {
+	width: 50px;
+}

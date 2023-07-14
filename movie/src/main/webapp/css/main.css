@@ -5,9 +5,6 @@ li{list-style:none}
 #wrap{
 	width:100%;
 }
-.non-cursor{
-	cursor: default;
-}
 .inner{
 	max-width:1200px;
 	margin:0 auto;
@@ -27,7 +24,7 @@ span{font-size:14px;}
 	align-items:center;
 	justify-content:space-around;
 	width:100%;
-	height:330px;
+	height:360px;
 	margin-top:20px;
 	padding:10px 0;
 	background:#eee;
@@ -35,32 +32,5 @@ span{font-size:14px;}
 
 .newest_items{
 	width:200px;
-	height:300px;
-	display:flex;
-	flex-direction:column;
-	justify-content:center;
-	align-items:center;
-}
-.name{
-	font-size:15px;
-	font-weight:bold;
-	margin:5px 0;
-}
-.price{
-	padding:3px 0;
-	color:red;
-	font-size:14px;
-	font-weight:bold;
-}
-.size{
-	text-align:center;
-	display:inline-block;
-	width:180px;
-	height:30px;
-	border:1px solid #ccc;
-	margin-top:5px;
-}
-strong{
-	line-height:30px;
-	color:gray;
+	height:330px;
 }

@@ -40,7 +40,7 @@
 </head>
 <body>
 	<h2>상품등록</h2>
-	<form action="add.do" method="post" name="addForm"
+	<form action="${pageContext.request.contextPath }/mvc_con/product.do?p_type=add" method="post" name="addForm"
 	 enctype="multipart/form-data" onsubmit="return validateForm(this)">
 		<table border="1">
 			<tr>

@@ -56,11 +56,11 @@ public class MemberDTO {
 	public void setmBIRTH(String mBIRTH) {
 		this.mBIRTH = mBIRTH;
 	}
-	public String getmBUY() {
-		return mBUY;
+	public String getmPHONE() {
+		return mPHONE;
 	}
-	public void setmBUY(String mBUY) {
-		this.mBUY = mBUY;
+	public void setmPHONE(String mPHONE) {
+		this.mPHONE = mPHONE;
 	}
 	public String getmDROP() {
 		return mDROP;
@@ -68,18 +68,14 @@ public class MemberDTO {
 	public void setmDROP(String mDROP) {
 		this.mDROP = mDROP;
 	}
-	public String getmPHONE() {
-		return mPHONE;
-	}
-	public void setmPHONE(String mPHONE) {
-		this.mPHONE = mPHONE;
-	}
 	public String getmGRADE() {
 		return mGRADE;
 	}
-	public void setmGRADE(String mgrade) {
-		this.mGRADE = mgrade;
+	public void setmGRADE(String mGRADE) {
+		this.mGRADE = mGRADE;
 	}
+	
+	
 	
 	
 }

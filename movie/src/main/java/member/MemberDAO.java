@@ -2,7 +2,6 @@ package member;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import common.JDBCConnect;
@@ -25,10 +24,9 @@ public class MemberDAO extends JDBCConnect{
 					dto.setmADDRESS(rs.getString("mADDRESS"));
 					dto.setmPOST(rs.getString("mPOST"));
 					dto.setmRDATE(rs.getString("mRDATE"));
-					dto.setmBIRTH(rs.getString("mBIRTH"));					
-					dto.setmBUY(rs.getString("mBUY"));
+					dto.setmBIRTH(rs.getString("mBIRTH"));
 					dto.setmDROP(rs.getString("mDROP"));
-					dto.setmGRADE(rs.getString("mGRADE"));
+					dto.setmGRADE(rs.getString("mGrade"));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -74,8 +72,7 @@ public class MemberDAO extends JDBCConnect{
 					dto.setmADDRESS(rs.getString("mADDRESS"));
 					dto.setmPOST(rs.getString("mPOST"));
 					dto.setmRDATE(rs.getString("mRDATE"));
-					dto.setmBIRTH(rs.getString("mBIRTH"));					
-					dto.setmBUY(rs.getString("mBUY"));
+					dto.setmBIRTH(rs.getString("mBIRTH"));	
 					dto.setmDROP(rs.getString("mDROP"));
 					memberlist.add(dto);
 				}

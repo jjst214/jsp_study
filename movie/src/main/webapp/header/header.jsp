@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/main.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/footer.css">
 
+
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 <%
@@ -17,7 +18,6 @@
 	String sessionId = (String)session.getAttribute("UserId");
 	String grade = (String)session.getAttribute("Grade");
 %>
-<title>Insert title here</title>
 
 </head>
 <body>
@@ -26,29 +26,39 @@
 			<h1><a href="${pageContext.request.contextPath }/index.jsp">로고</a></h1>
 			<p><input type="text"/></p>
 			<ul>
-				<%
-				if(sessionId != null){
-					//유저네임 세션이 있다면?  1:일반유저 / 5,10:관리자
+			<%
+				if(sessionId == null || grade == null){
+					%>
+					<li><a href="${pageContext.request.contextPath }/member/login.do">로그인</a></li>
+					<span>&nbsp;|&nbsp;</span>
+					<li><a href="${pageContext.request.contextPath }/member/join.do">회원가입</a></li>
+					<%
+				}else{
+					//sessionId가 있다면 --> 1:일반유저 / 5,10:관리자
 					if(grade.equals("1")){
 						%>
 						<li><a href="${pageContext.request.contextPath }/member/logout.do">로그아웃</a></li>
+						<span>&nbsp;|&nbsp;</span>
 						<li><a href="#">회원정보</a></li>
+						<span>&nbsp;|&nbsp;</span>
 						<li><a href="#">마이페이지</a></li>
 						<%
-					}else{
+					}else if(grade.equals("10")){
 						%>
 						<li><a href="${pageContext.request.contextPath }/member/logout.do">로그아웃</a></li>
-						<li><a href="#">상품등록</a></li>
+						<span>&nbsp;|&nbsp;</span>
+						<div class="dropdown">
+					      <a href="#" class="dropbtn">상품관리</a>
+					      <div class="dropdown-content">
+					        <a href="${pageContext.request.contextPath }/Add.jsp">상품등록</a>
+					        <a href="${pageContext.request.contextPath }/mvc_con/product.do?p_type=delete">상품삭제</a>
+					      </div>
+					    </div> 
 						<%
 					}
-					
-				}else{
-					%>
-						<li><a href="${pageContext.request.contextPath }/member/login.do">로그인</a></li>
-						<li><a href="${pageContext.request.contextPath }/member/join.do">회원가입</a></li>
-					<%
 				}
 				%>
+
 			</ul>
 		</div>
 		<nav id="nav_menu">
