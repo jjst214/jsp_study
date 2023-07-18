@@ -17,6 +17,9 @@
 	//로그인 세션 받아오기
 	String sessionId = (String)session.getAttribute("UserId");
 	String grade = (String)session.getAttribute("Grade");
+	if(grade == null){
+		grade = "0";
+	}
 %>
 
 </head>
@@ -27,7 +30,7 @@
 			<p><input type="text"/></p>
 			<ul>
 			<%
-				if(sessionId == null || grade == null){
+				if(sessionId == null || grade == null || grade.equals("0")){
 					%>
 					<li><a href="${pageContext.request.contextPath }/member/login.do">로그인</a></li>
 					<span>&nbsp;|&nbsp;</span>

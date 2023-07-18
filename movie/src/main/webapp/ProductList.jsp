@@ -1,3 +1,4 @@
+<%@page import="java.text.NumberFormat"%>
 <%@page import="utils.BoardPaging"%>
 <%@page import="mvc_con.ProductDTO"%>
 <%@page import="java.util.List"%>
@@ -20,7 +21,7 @@
 	//게시글 수 확인
 	int selectCount = dao.selectCount(param);
 	//1페이지당 보여지는 게시글 수 10
-	int pageSizes = 10;
+	int pageSizes = 12;
 	//블럭단위
 	int blockPages = 5;
 	//전체 페이지 수 = 전체 게시글/1페이지당 보여지는 게시글 수 --> 올림하여 정수로 리턴
@@ -43,6 +44,8 @@
 	List<ProductDTO> list = dao.getBoardList(param); 
 	dao.close();
 	
+	//가격에 쉼표 찍는용도
+	NumberFormat numberFormat = NumberFormat.getInstance();
 %>
 <%@ include file="../header/header.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/productList.css">
@@ -99,10 +102,6 @@
 		}
 		%>
 		</table>
-		<%
-		}
-		%>
-		
 		<div id="btm_section">
 			<input type="submit" value="선택상품 삭제" style="">
 			</form>
@@ -115,6 +114,58 @@
 				<input type="submit" value="검색"/>
 			</form>
 		</div>
+		<%
+		}else{
+			%>
+			<div id="listBox">
+			<%
+			if(list.isEmpty()){
+				%>
+				<h1>상품이 존재하지 않습니다.</h1>
+				<%
+			}else{
+				%>
+				<h2>상품 목록</h2>
+				<ul class="prdList">
+				<%
+				int idx = 1;
+				for(ProductDTO dto:list){
+				
+				%>
+					<li id=productBoxId_<%=idx %> class="records">
+						<a href="${pageContext.request.contextPath }/mvc_con/product.do?p_type=detail&num=<%=dto.getPid()%>">
+						<img src="uploads/<%=dto.getPimage()%>" width="240px" height="270px"></a>
+						<a href="${pageContext.request.contextPath }/mvc_con/product.do?p_type=detail&num=<%=dto.getPid()%>">
+						<%=dto.getPname() %></a>
+						<p><%=dto.getPdetail() %></p>
+						<a href="${pageContext.request.contextPath }/mvc_con/product.do?p_type=detail&num=<%=dto.getPid()%>" style="font-weight:bold;">
+						<%=numberFormat.format(Integer.parseInt(dto.getPprice())) %>원</a>
+					</li>
+				
+				<%
+				idx++;
+				}
+				
+				%>
+				
+				</ul>
+			</div>
+		<div id="btm_section">
+		<form method="get">
+			<select name="searchField">
+				<option value="pname">상품명</option>
+				<option value="content">내용</option>
+			</select>
+			<input type="text" name="searchWord"/>
+			<input type="submit" value="검색"/>
+		</form>
+		</div>
+				<%
+			}
+			
+		}
+		%>
+		
 		
 		<!-- 페이징 처리 -->
 		<div id="paging">

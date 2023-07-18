@@ -12,8 +12,10 @@ public class ListController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doGet(req, resp);
+		String type = req.getParameter("type");
+		if(type.equals("newest")) {
+			resp.sendRedirect(req.getContextPath()+"/ProductList.jsp");
+		}
 	}
 	
 }

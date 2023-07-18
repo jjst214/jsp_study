@@ -23,14 +23,19 @@
 				</div>
 				<div>
 					<h2><%=dto.getPname() %></h2>
-					<p>가격 : \<%=numberFormat.format(Integer.parseInt(dto.getPprice())) %></p>
-					<p>남은 재고 : <%=dto.getPstock() %></p>
+					<p style="font-weight:bold;"><span>가격</span>&emsp;&emsp;<%=numberFormat.format(Integer.parseInt(dto.getPprice())) %>원</p>
+					<p style="font-weight:bold;"><span>재고</span>&emsp;&emsp;<%=dto.getPstock() %></p>
 					<p>상품설명</p>
-					<textarea rows="20" cols="60" readonly><%=dto.getPdetail() %></textarea>
-					
+					<textarea rows="20" cols="60" id="detailArea" readonly><%=dto.getPdetail() %></textarea>
 				</div>
+				<button type="submit" id="editbtn"
+					 onclick="location.href='${pageContext.request.contextPath }/mvc_con/product.do?p_type=edit&pid=<%=dto.getPid()%>'">상품수정</button>
 			</div>
 		</div>
+		
+		<%
+	}else{
+		%>
 		
 		<%
 	}

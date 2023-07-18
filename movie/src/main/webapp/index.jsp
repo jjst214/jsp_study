@@ -26,7 +26,7 @@
 		</div>
 	</section>
 	
-	<div class="text inner"><h2 class="non-cursor">신상품</h2><span><a href="${pageContext.request.contextPath }/ProductList.jsp">더 보기</a></span></div>
+	<div class="text inner"><h2 class="non-cursor">신상품</h2><span><a href="${pageContext.request.contextPath }/mvc_con/list.do?type=newest">더 보기</a></span></div>
 	<section id="product1" class="inner">
 	<c:set var="lists" value="<%=lists%>" />
 	<c:set var="savedir" value="<%=url %>" />

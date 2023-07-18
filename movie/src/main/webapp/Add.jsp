@@ -23,7 +23,7 @@
 			return false;
 		}
 		if(form.detail.value == ""){
-			alert("비밀번호를 입력하세요");
+			alert("상품설명을 입력하세요");
 			form.detail.focus();
 			return false;
 		}
