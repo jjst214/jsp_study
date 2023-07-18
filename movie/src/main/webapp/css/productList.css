@@ -1,0 +1,57 @@
+@charset "UTF-8";
+.list>table a{
+	text-decoration-line:underline;
+}
+#btm_section{
+	display:flex;
+	flex-direction:row-reverse;
+	justify-content:center;
+	align-items:center;
+	padding:15px 0;
+}
+#btm_section>input{
+	margin: 0 30px;
+}
+.list{
+	margin: 0 auto;
+}
+.list>h2{
+	text-align:center;
+	padding:30px 0;
+}
+.list table{
+	margin:0 auto;
+}
+.list table td{
+	padding:5px 10px;
+}
+#paging{
+	text-align:center;
+	margin-bottom:30px;
+}
+#productInfo{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	padding:60px 0;
+}
+#productInfo>div:last-child{
+	margin-left:20px;
+}
+#productInfo>div:last-child textarea{
+	padding:5px;
+	border:none;
+	resize: none;
+	outline: none;
+	cursor: default;
+}
+#pimage{
+	width:350px;
+	height:350px;
+	border:1px solid #ccc;
+	padding:20px;
+}
+#pimage img{
+	width:100%;
+	height:100%;
+}

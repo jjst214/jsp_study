@@ -18,9 +18,25 @@ import fileupload.FileUtil;
 
 @WebServlet("/mvc_con/product.do")
 public class ProductController extends HttpServlet {
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("text/html;charset=UTF-8");
+		//상품 추가, 수정, 삭제 등 관리할 타입을 받음
+		String type = req.getParameter("p_type");
+		if(type.equals("add")) {
+			resp.sendRedirect(req.getContextPath()+"/Add.jsp");
+		}else if(type.equals("delete")) {
+			resp.sendRedirect(req.getContextPath()+"/ProductList.jsp");
+		}else if(type.equals("detail")) {
+			//상세보기시 폼에서 넘겨받은 상품번호를 상세화면 페이지에 담아 넘겨줌 
+			String num = req.getParameter("num");
+			resp.sendRedirect(req.getContextPath()+"/ProductDetail.jsp?num="+num+"");
+		}
+	}
 
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html;charset=UTF-8");
 		//상품 추가, 수정, 삭제 등 관리할 타입을 받음
 		String type = req.getParameter("p_type");
@@ -70,8 +86,15 @@ public class ProductController extends HttpServlet {
 				pw.close();
 			}
 		}else if(type.equals("delete")) {
-			resp.sendRedirect(req.getContextPath()+"/ProductList.jsp");
+			String[] arr = req.getParameterValues("chkbox");
+			ProductDAO dao = new ProductDAO();
+			int result = 0;
+			for(String a:arr) {
+				result = dao.delProduct(a);
+			}
+			dao.close();
 			
+			resp.sendRedirect(req.getContextPath()+"/ProductList.jsp");
 		}
 	}
 	

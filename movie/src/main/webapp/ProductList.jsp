@@ -19,7 +19,6 @@
 	ProductDAO dao = new ProductDAO();
 	//게시글 수 확인
 	int selectCount = dao.selectCount(param);
-	out.println("게시글 수는 : " + selectCount);
 	//1페이지당 보여지는 게시글 수 10
 	int pageSizes = 10;
 	//블럭단위
@@ -46,19 +45,20 @@
 	
 %>
 <%@ include file="../header/header.jsp" %>
-<title>상품 관리 페이지</title>
-</head>
-<body>
-	<div id="wrap" class="inner">
-		<h2>상품 목록</h2>
-		<%
-		if(session.getAttribute("Grade").equals("5") || session.getAttribute("Grade").equals("10")){
-			
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/productList.css">
+
+
+	<div id="wrap" class="inner list">
 		
+		<%
+		//관리자로 로그인하면 보여질 상품리스트 화면(수정, 삭제)
+		if(grade.equals("5") || grade.equals("10")){
 		%>
+		<title>상품 관리 페이지</title>
+		<h2>상품 목록(관리자)</h2>
 		<table border="1" style="border-collapse:collapse; text-align:center;">
 			<tr>
-				<td><input type="checkbox" name="chkbox" value="all" onclick="selectAll(this)">모두선택</td>
+				<td><input type="checkbox" name="selectall" value="selectall" onclick="selectAll(this)">모두선택</td>
 				<td>상품번호</td>
 				<td>상품명</td>
 				<td>가격</td>
@@ -69,21 +69,24 @@
 				<td>판매량</td>
 			</tr>
 		<%
+		%>
+		<form action="${pageContext.request.contextPath }/mvc_con/product.do?p_type=delete" method="post" name="deleteForm">
+		<%
 		if(list.isEmpty()){
 			%>
 			<tr>
 				<td colspan="6">글이 존재하지 않습니다.</td>
 			</tr>
-		<form action="${pageContext.request.contextPath }/mvc_con/product.do?p_type=delete" method="post">
+		
 			<%
 		}else{
 			
 			for(ProductDTO dto:list){
 			%>
 			<tr>
-				<td><input type="checkbox" name="chkbox" value="<%=dto.getPid()%>"></td>
+				<td><input type="checkbox" name="chkbox" value="<%=dto.getPid()%>" onclick="checkSelectAll(this)"/></td>
 				<td><%=dto.getPid() %></td>
-				<td><%=dto.getPname() %></td>
+				<td><a href="${pageContext.request.contextPath }/mvc_con/product.do?p_type=detail&num=<%=dto.getPid()%>"><%=dto.getPname() %></a></td>
 				<td><%=dto.getPprice() %></td>
 				<td><%=dto.getPstock() %></td>
 				<td><img src="uploads/<%=dto.getPimage()%>" width="50px" height="50px"></td>
@@ -95,12 +98,14 @@
 			}
 		}
 		%>
-		</form>
 		</table>
 		<%
 		}
 		%>
-		<div>
+		
+		<div id="btm_section">
+			<input type="submit" value="선택상품 삭제" style="">
+			</form>
 			<form method="get">
 				<select name="searchField">
 					<option value="pname">상품명</option>
@@ -112,7 +117,7 @@
 		</div>
 		
 		<!-- 페이징 처리 -->
-		<div>
+		<div id="paging">
 		<%= 
 		BoardPaging.pagingStr(selectCount, totalPages, pageSizes, 
 			blockPages, pageNum, request.getRequestURI(),
@@ -121,12 +126,19 @@
 		%>
 		</div>
 	</div>
-</body>
+<%@ include file="/footer/footer.jsp" %>
 <script>
 	//전체선택/해제
+	function checkSelectAll(checkbox)  {
+	  const selectall = document.querySelector('input[name="selectall"]');
+	  
+	  if(checkbox.checked === false)  {
+	    selectall.checked = false;
+	  }
+	}
+
 	function selectAll(selectAll)  {
-	  const checkboxes 
-	     = document.querySelectorAll('input[type="checkbox"]');
+	  const checkboxes = document.getElementsByName('chkbox');
 	  
 	  checkboxes.forEach((checkbox) => {
 	    checkbox.checked = selectAll.checked

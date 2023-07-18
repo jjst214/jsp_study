@@ -50,7 +50,7 @@
 						<div class="dropdown">
 					      <a href="#" class="dropbtn">상품관리</a>
 					      <div class="dropdown-content">
-					        <a href="${pageContext.request.contextPath }/Add.jsp">상품등록</a>
+					        <a href="${pageContext.request.contextPath }/mvc_con/product.do?p_type=add">상품등록</a>
 					        <a href="${pageContext.request.contextPath }/mvc_con/product.do?p_type=delete">상품삭제</a>
 					      </div>
 					    </div> 
