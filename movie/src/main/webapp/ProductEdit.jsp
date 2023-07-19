@@ -11,6 +11,7 @@
 	ProductDAO dao = new ProductDAO();
 	ProductDTO dto = dao.selectProduct(pid);
 	dao.close();
+	String url = dto.getPimage().substring(0, dto.getPimage().lastIndexOf("."));
 	if(grade.equals("5") || grade.equals("10")){
 		%>
 		<div class="wrap">
@@ -21,7 +22,7 @@
 			<div id="productInfo" class="inner">
 				
 				<div id="pimage">
-					<img src="uploads/<%=dto.getPimage()%>"/>
+					<img src="uploads/<%=url %>/<%=dto.getPimage()%>"/>
 					<p style="padding:35px 0; font-weight:bold;">상품 이미지 변경&nbsp;<input type="file" name="updateFile"></p>
 				</div>
 				

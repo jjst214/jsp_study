@@ -12,6 +12,7 @@
 	ProductDAO dao = new ProductDAO();
 	ProductDTO dto = dao.selectProduct(num);
 	dao.close();
+	String url = dto.getPimage().substring(0,dto.getPimage().lastIndexOf("."));
 	if(grade.equals("5") || grade.equals("10")){
 		%>
 		<div class="wrap">
@@ -19,7 +20,7 @@
 			
 			<div id="productInfo" class="inner">
 				<div id="pimage">
-					<img src="uploads/<%=dto.getPimage()%>/<%=dto.getPimage() %>"/>
+					<img src="uploads/<%=url %>/<%=dto.getPimage() %>"/>
 				</div>
 				<div>
 					<h2><%=dto.getPname() %></h2>
