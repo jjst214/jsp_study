@@ -87,7 +87,7 @@
 		}else{
 			
 			for(ProductDTO dto:list){
-				String url = dto.getPimage().substring(dto.getPimage().lastIndexOf("."));
+				String url = dto.getPimage().substring(0,dto.getPimage().lastIndexOf("."));
 				
 			%>
 			<tr>
