@@ -31,10 +31,10 @@
 					<p style="font-weight:bold;"><span>가격</span>&emsp;&emsp;<input type="text" value="<%=dto.getPprice() %>" name="pprice"></p>
 					<p style="font-weight:bold;"><span>재고</span>&emsp;&emsp;<input type="text" value="<%=dto.getPstock() %>" name="pstock"></p>
 					<p>상품설명</p>
-					<textarea rows="20" cols="60" name="pdetail"><%=dto.getPdetail() %></textarea>
+					<textarea rows="20" cols="60" name="pdetail" id="pdetail"><%=dto.getPdetail() %></textarea>
+					<button type="submit" id="editbtn">수정</button>
+					<button type="button" onclick="history.back();" style="float:right; padding:5px 10px; margin:5px 10px;">돌아가기</button>
 				</div>
-				<button type="submit" id="editbtn">상품수정</button>
-				
 			</div>
 			</form>
 		</div>

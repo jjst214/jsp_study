@@ -52,15 +52,15 @@ public class ListController extends HttpServlet {
 		dao.close();
 		
 		//뷰에 전달할 매개변수 추가
-		String pagingStr = BoardPaging.pagingstr(totalCount, pageSize, blockPage, pageNum, "./mvcboard/list.do");
-		map.put("pagingStr", pagingStr);
-		map.put("totalCount", totalCount);
-		map.put("pageSize", pageSize);
-		map.put("pageNum", pageNum);
-		req.setAttribute("boardlists", boardlists);
-		req.setAttribute("map", map);
-		req.getRequestDispatcher("/List.jsp").forward(req, resp);
-		
+		//String pagingStr = BoardPaging.pagingStr(totalCount, pageSize, blockPage, pageNum, "./mvcboard/list.do");
+//		map.put("pagingStr", pagingStr);
+//		map.put("totalCount", totalCount);
+//		map.put("pageSize", pageSize);
+//		map.put("pageNum", pageNum);
+//		req.setAttribute("boardlists", boardlists);
+//		req.setAttribute("map", map);
+//		req.getRequestDispatcher("/List.jsp").forward(req, resp);
+//		
 	}
 	
 }

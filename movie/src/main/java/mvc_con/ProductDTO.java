@@ -11,7 +11,14 @@ public class ProductDTO {
 	private String prdate;
 	private String phit;
 	private String psell;
+	private String pimage2;
 	
+	public String getPimage2() {
+		return pimage2;
+	}
+	public void setPimage2(String pimage2) {
+		this.pimage2 = pimage2;
+	}
 	public String getPid() {
 		return pid;
 	}

@@ -35,8 +35,8 @@ public class ProductDAO extends JDBCConnect {
 	//상품등록
 	public int addProduct(ProductDTO dto) {
 		int result = 0;
-		String sql = "insert into product(pid,pname,pprice,pstock,pimage,pdetail)"
-				+ " values(seq_pid.nextval, ?, ?, ?, ?, ?)";
+		String sql = "insert into product(pid,pname,pprice,pstock,pimage,pdetail,pimage2)"
+				+ " values(seq_pid.nextval, ?, ?, ?, ?, ?, ?)";
 		try {
 			psmt = con.prepareStatement(sql);
 			psmt.setString(1, dto.getPname());
@@ -44,6 +44,7 @@ public class ProductDAO extends JDBCConnect {
 			psmt.setString(3, dto.getPstock());
 			psmt.setString(4, dto.getPimage());
 			psmt.setString(5, dto.getPdetail());
+			psmt.setString(6, dto.getPimage2());
 			result = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -28,11 +28,11 @@
 			return false;
 		}
 		if(form.file1.value == ""){
-			alert("썸네일 사진을 첨부해주세요");
+			alert("상품 사진을 첨부해주세요");
 			return false;
 		}
 		if(form.file2.value == ""){
-			alert("상품 사진을 첨부해주세요");
+			alert("상품 상세 이미지를 첨부해주세요");
 			return false;
 		}
 	}
@@ -62,6 +62,10 @@
 			<tr>
 				<td>상품 사진</td>
 				<td><input type="file" name="file1"/></td>
+			</tr>
+			<tr>
+				<td>상세 상품 이미지</td>
+				<td><input type="file" name="file2"/></td>
 			</tr>
 			<tr>
 				<td colspan="2">

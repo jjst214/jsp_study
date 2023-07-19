@@ -36,9 +36,10 @@
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${lists}" var="items" varStatus="loop">
+				<c:set var="producturl" value="${fn:split(items.pimage, '.') }"/>
 				<div class="newest_items">
 					<a href="#">
-						<img src="./uploads/${items.pimage }" width="200px" height="200px" />
+						<img src="./uploads/${producturl[fn:length(producturl)-2]}/${items.pimage}" width="200px" height="200px" />
 						<p class="name">${items.pname }</p>
 						<p class="price"><fmt:formatNumber value="${items.pprice}" pattern="#,###" />원</p>
 					</a>

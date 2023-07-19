@@ -3,6 +3,7 @@ package mvc_con;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -26,7 +27,7 @@ public class ProductController extends HttpServlet {
 		String type = req.getParameter("p_type");
 		if(type.equals("add")) {
 			resp.sendRedirect(req.getContextPath()+"/Add.jsp");
-		}else if(type.equals("delete")) {
+		}else if(type.equals("manage")) {
 			resp.sendRedirect(req.getContextPath()+"/ProductList.jsp");
 		}else if(type.equals("detail")) {
 			//상세보기시 폼에서 넘겨받은 상품번호를 상세화면 페이지에 담아 넘겨줌 
@@ -43,7 +44,8 @@ public class ProductController extends HttpServlet {
 		resp.setContentType("text/html; charset=UTF-8");
 		req.setCharacterEncoding("utf-8");
 		String saveDirectory = req.getServletContext().getRealPath("/uploads");
-		int maxPostSize = 1024*1000;
+		int maxPostSize = 1024*2000;
+		
 		MultipartRequest mr = FileUtil.uploadFile(req, saveDirectory, maxPostSize);
 		//상품 추가, 수정, 삭제 등 관리할 타입을 받음
 		String type="";
@@ -65,17 +67,41 @@ public class ProductController extends HttpServlet {
 			dto.setPstock(mr.getParameter("stock"));
 			dto.setPdetail(mr.getParameter("detail"));
 			
-			String file = mr.getFilesystemName("file1");
-			if(file != null) {
+			String file1 = mr.getFilesystemName("file1");
+			String file2 = mr.getFilesystemName("file2");
+			if(file1 != null && file2 != null) {
 				String now = new SimpleDateFormat("yyMMdd_HmsS").format(new Date());
-				String file_ext = file.substring(file.lastIndexOf("."));
+				String file_ext = file1.substring(file1.lastIndexOf("."));
+				String file2_ext = file2.substring(file2.lastIndexOf("."));
 				String newFileName = "product_" + now + file_ext;
+				String newFileName2 = "detail_" + now + file2_ext;
 				
-				File oFile = new File(saveDirectory + File.separator + file);
-				File nFile = new File(saveDirectory + File.separator + newFileName);
-				oFile.renameTo(nFile);
+				//게시물 사진 폴더관리
+				String path = saveDirectory + File.separator + "product_" + now;
+				System.out.println(path);
+				File folder = new File(path);
+				if(!folder.exists()) {
+					try{
+						//폴더 생성합니다.
+					    folder.mkdir();
+					    File oFile = new File(saveDirectory + File.separator + file1);
+						File nFile = new File(path + File.separator + newFileName);
+						File oFile2 = new File(saveDirectory + File.separator + file2);
+						File nFile2 = new File(path + File.separator + newFileName2);
+						oFile.renameTo(nFile);
+						oFile2.renameTo(nFile2);
+						
+						dto.setPimage(newFileName);
+						dto.setPimage2(newFileName2);
+				    }catch(Exception e){
+					    e.getStackTrace();
+					}        
+			    }else {
+					System.out.println("이미 폴더가 생성되어 있습니다.");
+				}
 				
-				dto.setPimage(newFileName);
+				
+				
 			}
 			ProductDAO dao = new ProductDAO();
 			int result = dao.addProduct(dto);
@@ -95,14 +121,37 @@ public class ProductController extends HttpServlet {
 				pw.close();
 			}
 		}else if(type.equals("delete")) {
+			//상품 삭제
 			String[] arr = req.getParameterValues("chkbox");
-			ProductDAO dao = new ProductDAO();
-			int result = 0;
-			for(String a:arr) {
-				result = dao.delProduct(a);
+			if(arr == null) {
+				//아무 상품도 체크하지 않고 삭제버튼을 누르면 경고창 띄우고 이전페이지로 돌아감 
+				PrintWriter pw = resp.getWriter();
+				pw.println("<script>");
+				pw.println("alert('삭제할 상품을 1개 이상 선택해주세요.');");
+				pw.println("history.back();");
+				pw.println("</script>");
+				pw.close();
+			}else {
+				ProductDAO dao = new ProductDAO();
+				int result = 0;
+				for(String a:arr) {
+					result = dao.delProduct(a);
+				}
+				dao.close();
+				if(result == 1) {
+					resp.sendRedirect(req.getContextPath()+"/ProductList.jsp");
+				}else {
+					PrintWriter pr = resp.getWriter();
+					pr.println("<script>");
+					pr.println("alert('삭제실패');");
+					pr.println("history.back();");
+					pr.println("</script>");
+					pr.close();
+				}
+					
+				
+				
 			}
-			dao.close();
-			resp.sendRedirect(req.getContextPath()+"/ProductList.jsp");
 		}else if(type.equals("edit")) {
 			String pid = mr.getParameter("pid");
 			String pname = mr.getParameter("pname");

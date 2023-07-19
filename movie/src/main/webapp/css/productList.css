@@ -49,6 +49,12 @@
 	resize: none;
 	outline: none;
 	cursor: default;
+	display:block;
+}
+#pdetail{
+	padding:5px;
+	resize: none;
+	display:block;
 }
 #productInfo>div:nth-child(2) h2{
 	padding:30px 0;
@@ -61,27 +67,27 @@
 	border-top:1px solid #ccc;
 }
 #pimage{
-	width:450px;
-	height:450px;
+	width:470px;
+	height:470px;
 	border:1px solid #ccc;
-	padding:20px;
 }
 #pimage img{
 	width:100%;
 	height:100%;
 }
 #editbtn{
-	position:absolute;
-	bottom:10px;
-	right:100px;
-	padding:5px;
-}
-.prdList{
-	
+	display:block;
+	padding:5px 10px;
+	margin: 5px 0;
+	float:right;
 }
 .records{
 	display:inline-block;
 	width:20%;
 	height:400px;
 	margin:0 20px;
+}
+#list_title{
+	border-bottom:1px solid #ccc;
+	margin-bottom: 80px;
 }

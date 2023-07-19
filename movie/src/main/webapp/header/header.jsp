@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,13 +51,7 @@
 						%>
 						<li><a href="${pageContext.request.contextPath }/member/logout.do">로그아웃</a></li>
 						<span>&nbsp;|&nbsp;</span>
-						<div class="dropdown">
-					      <a href="#" class="dropbtn">상품관리</a>
-					      <div class="dropdown-content">
-					        <a href="${pageContext.request.contextPath }/mvc_con/product.do?p_type=add">상품등록</a>
-					        <a href="${pageContext.request.contextPath }/mvc_con/product.do?p_type=delete">상품삭제</a>
-					      </div>
-					    </div> 
+					    <li><a href="${pageContext.request.contextPath }/mvc_con/product.do?p_type=manage">상품관리</a></li>
 						<%
 					}
 				}
