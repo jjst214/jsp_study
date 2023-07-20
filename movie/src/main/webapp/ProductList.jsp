@@ -1,3 +1,4 @@
+<%@page import="java.io.PrintWriter"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="utils.BoardPaging"%>
 <%@page import="mvc_con.ProductDTO"%>
@@ -16,7 +17,7 @@
 		param.put("searchField", searchField);
 		param.put("searchWord", searchWord);
 	}
-	
+	param.put("cate", request.getParameter("cate"));
 	ProductDAO dao = new ProductDAO();
 	
 %>
@@ -129,6 +130,7 @@
 		</div>
 		<%
 		}else{
+			
 			//게시글 수 확인
 			int selectCount = dao.selectCount(param);
 			//1페이지당 보여지는 게시글 수 12
@@ -152,7 +154,7 @@
 			param.put("start", start);
 			param.put("end", end);
 			
-			List<ProductDTO> list = dao.getBoardList(param); 
+			List<ProductDTO> list = dao.getBoardList(param);
 			dao.close();
 			
 			//가격에 쉼표 찍는용도
@@ -180,14 +182,14 @@
 				<%
 				int idx = 1;
 				for(ProductDTO dto:list){
-				
+					String url = dto.getPimage().substring(0,dto.getPimage().lastIndexOf("."));
 				%>
 					<li id=productBoxId_<%=idx %> class="records">
 						<a href="${pageContext.request.contextPath }/mvc_con/product.do?p_type=detail&num=<%=dto.getPid()%>">
-						<img src="uploads/<%=dto.getPimage()%>/<%=dto.getPimage() %>" width="240px" height="270px"></a>
-						<a href="${pageContext.request.contextPath }/mvc_con/product.do?p_type=detail&num=<%=dto.getPid()%>">
+						<img src="uploads/<%=url%>/<%=dto.getPimage() %>" width="100%" height="270px"></a>
+						<a href="${pageContext.request.contextPath }/mvc_con/product.do?p_type=detail&num=<%=dto.getPid()%>" style="height:60px; display:block;">
 						<%=dto.getPname() %></a>
-						<p><%=dto.getPdetail() %></p>
+						<p style="color: #ff7267; font-weight:520;"><%=dto.getPdetail() %></p>
 						<p style="font-weight:bold;">
 						<%=numberFormat.format(Integer.parseInt(dto.getPprice())) %>원</p>
 					</li>

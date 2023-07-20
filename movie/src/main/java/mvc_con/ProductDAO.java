@@ -26,6 +26,7 @@ public class ProductDAO extends JDBCConnect {
 				dto.setPrdate(rs.getString(7));
 				dto.setPhit(rs.getString(8));
 				dto.setPsell(rs.getString(9));
+				dto.setPimage2(rs.getString(10));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -89,12 +90,21 @@ public class ProductDAO extends JDBCConnect {
 	//검색 조건에 맞는 게시글의 개수 반환하기
 	public int selectCount(Map<String, Object> map) {
 		int totalCount = 0;
+		String cate = map.get("cate").toString();
 		//게시물 수를 얻어오는 쿼리작성
 		String sql = "select count(*) from product";
 		//검색 요청이 있을경우 where조건 추가
 		if(map.get("searchWord") != null) {
-			sql += " where " + map.get("searchField") + " like '%"
+			sql += " where pname like '%"
 					+ map.get("searchWord") + "%'";
+		}else if(cate.equals("1")) {
+			sql += " where pcate=1 ";
+		}else if(cate.equals("2")) {
+			sql += " where pcate=2 ";
+		}else if(cate.equals("3")) {
+			sql += " where pcate=3 ";
+		}else if(cate.equals("4")) {
+			sql += " where pcate=4 ";
 		}
 		try {
 			stmt = con.createStatement();
@@ -110,12 +120,22 @@ public class ProductDAO extends JDBCConnect {
 	//검색 & 게시판 글 불러오기
 	public List<ProductDTO> getBoardList(Map<String, Object> map){
 		List<ProductDTO> plist = new ArrayList<>();
+		String cate = map.get("cate").toString();
+		
 		String sql = "select * from("
 				+ "select Tb.*, rownum rnum from ("
 				+ "select * from product ";
 		if(map.get("searchWord") != null) {
-			sql += " where " + map.get("searchField") + " like '%"
+			sql += " where pname like '%"
 					+ map.get("searchWord") + "%'";
+		}else if(cate.equals("1")) {
+			sql += " where pcate=1 ";
+		}else if(cate.equals("2")) {
+			sql += " where pcate=2 ";
+		}else if(cate.equals("3")) {
+			sql += " where pcate=3 ";
+		}else if(cate.equals("4")) {
+			sql += " where pcate=4 ";
 		}
 		sql += " order by pid desc) Tb"
 				+ ") where rnum between ? and ?";
@@ -124,7 +144,7 @@ public class ProductDAO extends JDBCConnect {
 			psmt.setString(1, map.get("start").toString());
 			psmt.setString(2, map.get("end").toString());
 			rs = psmt.executeQuery();
-			
+			System.out.println(sql);
 			while(rs.next()) {
 				ProductDTO dto = new ProductDTO();
 				dto.setPid(rs.getString(1));

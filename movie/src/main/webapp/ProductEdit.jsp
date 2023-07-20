@@ -24,6 +24,7 @@
 				<div id="pimage">
 					<img src="uploads/<%=url %>/<%=dto.getPimage()%>"/>
 					<p style="padding:35px 0; font-weight:bold;">상품 이미지 변경&nbsp;<input type="file" name="updateFile"></p>
+					
 				</div>
 				
 				<div>
@@ -37,6 +38,13 @@
 					<button type="button" onclick="history.back();" style="float:right; padding:5px 10px; margin:5px 10px;">돌아가기</button>
 				</div>
 			</div>
+			<div class="inner">
+				<p style="padding:35px 0; font-weight:bold;">상품하단 상세 이미지 변경&nbsp;<input type="file" name="updateFile2"></p>
+				<div>
+					<img alt="상품 상세" src="uploads/<%=url %>/<%=dto.getPimage2()%>">
+				</div>
+			</div>
+			
 			</form>
 		</div>
 		

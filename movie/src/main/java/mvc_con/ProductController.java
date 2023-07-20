@@ -44,7 +44,7 @@ public class ProductController extends HttpServlet {
 		resp.setContentType("text/html; charset=UTF-8");
 		req.setCharacterEncoding("utf-8");
 		String saveDirectory = req.getServletContext().getRealPath("/uploads");
-		int maxPostSize = 1024*2000;
+		int maxPostSize = 1024*5000;
 		
 		MultipartRequest mr = FileUtil.uploadFile(req, saveDirectory, maxPostSize);
 		//상품 추가, 수정, 삭제 등 관리할 타입을 받음
@@ -78,7 +78,6 @@ public class ProductController extends HttpServlet {
 				
 				//게시물 사진 폴더관리
 				String path = saveDirectory + File.separator + "product_" + now;
-				System.out.println(path);
 				File folder = new File(path);
 				if(!folder.exists()) {
 					try{
@@ -159,33 +158,54 @@ public class ProductController extends HttpServlet {
 			String pstock = mr.getParameter("pstock");
 			String pdetail = mr.getParameter("pdetail");
 			
+			
 			ProductDAO dao = new ProductDAO();
 			ProductDTO dto = new ProductDTO();
 			ProductDTO oldProduct = dao.selectProduct(pid);
 			dao.close();
 			String oldFileName = oldProduct.getPimage();
+			String oldFileName2 = oldProduct.getPimage2();
+			System.out.println("oldFileName 이름 : "+oldFileName);
+			System.out.println("oldFileName2 이름 : "+oldFileName2);
 			dto.setPid(oldProduct.getPid());
 			dto.setPname(pname);
 			dto.setPprice(pprice);
 			dto.setPstock(pstock);
 			dto.setPdetail(pdetail);
 			dto.setPimage(oldProduct.getPimage());
+			dto.setPimage2(oldProduct.getPimage2());
 			//파일 업로드 처리
 			
-			String file = mr.getFilesystemName("updateFile");
-			if(file != null) {
-				String now = new SimpleDateFormat("yyMMdd_HmsS").format(new Date());
-				String file_ext = file.substring(file.lastIndexOf("."));
-				String newFileName = "product_" + now + file_ext;
+			String file1 = mr.getFilesystemName("updateFile");
+			String file2 = mr.getFilesystemName("updateFile2");
+			String path = saveDirectory + File.separator + oldFileName.substring(0,oldFileName.lastIndexOf("."));
+			System.out.println(path);
+			System.out.println("file1 경로는 : " + file1);
+			System.out.println("file2 경로는 : " + file2);
+			if(file1 != null) {
 				
-				File oFile = new File(saveDirectory + File.separator + file);
-				File nFile = new File(saveDirectory + File.separator + newFileName);
+				//기존 상품 사진삭제
+				File old = new File(path+"/"+oldFileName);
+				old.delete();
+				
+				File oFile = new File(saveDirectory + File.separator + file1);
+				File nFile = new File(path + File.separator + oldFileName);
+				
 				oFile.renameTo(nFile);
 				
-				dto.setPimage(newFileName);
-				//기존 상품 사진삭제
-				File old = new File(saveDirectory+"/"+oldFileName);
+			}
+			if(file2 != null) {
+				
+				File old = new File(path+"/"+oldFileName2);
+				System.out.println("old 경로 : " + old);
 				old.delete();
+				
+				File oFile = new File(saveDirectory + File.separator + file2);
+				File nFile = new File(path + File.separator + oldFileName2);
+				System.out.println("ofile 경로 : " + oFile);
+				System.out.println("nfile 경로 : " + nFile);
+				oFile.renameTo(nFile);
+				
 			}
 			ProductDAO dao2 = new ProductDAO();
 			int result = dao2.editProduct(dto);
