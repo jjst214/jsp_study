@@ -40,9 +40,6 @@
 						<p class="name">${items.pname }</p>
 						<p class="price"><fmt:formatNumber value="${items.pprice}" pattern="#,###" />원</p>
 					</a>
-					<a href="#" class="size">
-						<strong>Size View</strong>
-					</a>
 				</div>
 				</c:forEach>
 			</c:otherwise>

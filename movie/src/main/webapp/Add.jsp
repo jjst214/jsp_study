@@ -12,6 +12,10 @@
 			form.name.focus();
 			return false;
 		}
+		if(form.categori.value == ""){
+			alert("카테고리를 선택해주세요.");
+			return false;
+		}
 		if(form.price.value == ""){
 			alert("상품가격을 입력하세요");
 			form.price.focus();
@@ -20,11 +24,6 @@
 		if(form.stock.value == ""){
 			alert("재고수량을 입력하세요");
 			form.stock.focus();
-			return false;
-		}
-		if(form.detail.value == ""){
-			alert("상품설명을 입력하세요");
-			form.detail.focus();
 			return false;
 		}
 		if(form.file1.value == ""){
@@ -45,7 +44,15 @@
 		<table border="1">
 			<tr>
 				<td>상품명</td>
-				<td><input type="text" name="name"/></td>
+				<td><input type="text" name="name"/>
+				<select name="categori" id="cate">
+					<option>상품 카테고리</option>
+					<option value="1">사료</option>
+					<option value="2">간식</option>
+					<option value="3">패션</option>
+					<option value="4">장난감/훈련용품</option>
+				</select></td>
+				
 			</tr>
 			<tr>
 				<td>가격</td>

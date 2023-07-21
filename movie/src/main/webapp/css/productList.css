@@ -23,7 +23,7 @@
 	margin:0 auto;
 }
 .list table td{
-	padding:5px 10px;
+	padding:3px;
 }
 .prdList{
 	display:flex;
@@ -101,7 +101,7 @@
 .pdt_btn{
 	width:100%;
 	height: 60px;
-	margin-bottom:20px;
+	margin:20px 0;
 	display:flex;
 	justify-content:space-between;
 	align-items:center;

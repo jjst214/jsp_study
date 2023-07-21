@@ -33,13 +33,14 @@
 	<header>
 		<div id="top_nav">
 			<h1><a href="${pageContext.request.contextPath }/index.jsp">로고</a></h1>
-			<form method="get" action="ProductList.jsp" id="searchForm">
+			<form method="get" action="${pageContext.request.contextPath }/mvc_con/list.do" id="searchForm">
+				<input type="hidden" name="cate" value="all">
 				<input type="text" name="searchWord" id="searchWord" placeholder="상품명을 검색해보세요"/>
 			</form>
 			<ul>
 			<%
 				//비회원, 비로그인이 보는 헤더
-				if(sessionId == null || grade == null || grade.equals("0")){
+				if(sessionId == null || grade == null){
 					%>
 					<li><a href="${pageContext.request.contextPath }/member/login.do">로그인</a></li>
 					<span>&nbsp;|&nbsp;</span>
@@ -61,7 +62,7 @@
 						<li>관리자 로그인 중입니다.</li>
 						<li><a href="${pageContext.request.contextPath }/member/logout.do">로그아웃</a></li>
 						<span>&nbsp;|&nbsp;</span>
-					    <li><a href="${pageContext.request.contextPath }/mvc_con/product.do?p_type=manage">상품관리</a></li>
+					    <li><a href="${pageContext.request.contextPath }/mvc_con/product.do?p_type=manage&cate=all">상품관리</a></li>
 						<%
 					}
 				}

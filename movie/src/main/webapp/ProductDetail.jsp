@@ -37,6 +37,15 @@
 					 onclick="location.href='${pageContext.request.contextPath }/mvc_con/product.do?p_type=edit&pid=<%=dto.getPid()%>'">상품수정</button>
 					</c:when>
 					<c:otherwise>
+					<div class="selectOption">
+						<h4><%=dto.getPname() %></h4>
+						<span>
+							<input type="text" value="1" id="pcount">
+							<a href="#none" onclick="count('up');"><img src="https://img.echosting.cafe24.com/skin/base_ko_KR/product/btn_count_up.gif" class="up"></a>
+							<a href="#none" onclick="count('down');"><img src="https://img.echosting.cafe24.com/skin/base_ko_KR/product/btn_count_down.gif" class="down"></a>
+						</span>
+						<p id="totalPrice"><%=numberFormat.format(Integer.parseInt(dto.getPprice())) %>원</p>
+					</div>
 					<div class="pdt_btn">
 						<a href="#" onclick="loginChk(this);" id="buy">BUY IT NOW</a>
 						<a href="#" onclick="loginChk(this);">ADD TO CART</a>
@@ -66,6 +75,27 @@
 						location.href="${pageContext.request.contextPath }/mvc_con/addcart.do";
 					}
 				}
+			}
+			
+			function count(type){
+				let total = document.querySelector("#totalPrice");
+				let count = document.querySelector("#pcount");
+				let num = count.value;
+				
+				let price = <%=dto.getPprice()%>;
+				
+				if(type === 'up'){
+					num = Number(num) + 1;
+					count.value = num;
+				}else if(type === 'down'){
+					if(num != 1){
+						num = Number(num) - 1;
+						count.value = num;
+					}
+				}
+				let result = Number(price) * Number(num);
+				let format = result.toLocaleString();
+				total.innerHTML = format+"원";	
 			}
 		</script>
 		<%

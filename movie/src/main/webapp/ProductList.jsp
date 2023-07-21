@@ -13,11 +13,18 @@
 	Map<String, Object> param = new HashMap<>();
 	String searchField = request.getParameter("searchField");
 	String searchWord = request.getParameter("searchWord");
+	String cate = request.getParameter("cate");
 	if(searchWord != null){
 		param.put("searchField", searchField);
 		param.put("searchWord", searchWord);
 	}
-	param.put("cate", request.getParameter("cate"));
+	if(cate == null){
+		param.put("cate","all");
+	}else{
+		param.put("cate", cate);	
+	}
+	
+	
 	ProductDAO dao = new ProductDAO();
 	
 %>
@@ -28,6 +35,9 @@
 	<div id="wrap" class="inner list" style="position:relative;">
 		
 		<%
+		//가격에 쉼표 찍는용도
+		NumberFormat numberFormat = NumberFormat.getInstance();
+		
 		//관리자로 로그인하면 보여질 상품리스트 화면(수정, 삭제)
 		if(grade.equals("5") || grade.equals("10")){
 			//게시글 수 확인
@@ -55,8 +65,6 @@
 			
 			List<ProductDTO> list = dao.getBoardList(param); 
 			dao.close();
-			//가격에 쉼표 찍는용도
-			NumberFormat numberFormat = NumberFormat.getInstance();
 		%>
 		<title>상품 관리 페이지</title>
 		<h2>상품 목록(관리자)</h2>
@@ -64,15 +72,15 @@
 		style="padding:5px 10px; position:absolute; bottom:30px; right:120px;">새 상품등록</button>
 		<table border="1" style="border-collapse:collapse; text-align:center;">
 			<tr>
-				<td><input type="checkbox" name="selectall" value="selectall" onclick="selectAll(this)">모두선택</td>
-				<td>상품번호</td>
+				<td style="width:30px;"><input type="checkbox" name="selectall" value="selectall" onclick="selectAll(this)"></td>
+				<td style="width:65px;">상품번호</td>
 				<td>상품명</td>
 				<td>가격</td>
-				<td>남은재고</td>
-				<td>상품이미지</td>
+				<td style="width:50px;">재고</td>
+				<td style="width:100px;">상품이미지</td>
 				<td>상품설명</td>
 				<td>상품등록일</td>
-				<td>판매량</td>
+				<td style="width:100px;">판매량</td>
 			</tr>
 		<%
 		%>
@@ -95,7 +103,7 @@
 				<td><input type="checkbox" name="chkbox" value="<%=dto.getPid()%>" onclick="checkSelectAll(this)"/></td>
 				<td><%=dto.getPid() %></td>
 				<td><a href="${pageContext.request.contextPath }/mvc_con/product.do?p_type=detail&num=<%=dto.getPid()%>"><%=dto.getPname() %></a></td>
-				<td><%=dto.getPprice() %></td>
+				<td><%=numberFormat.format(Integer.parseInt(dto.getPprice())) %></td>
 				<td><%=dto.getPstock() %></td>
 				<td><img src="uploads/<%=url %>/<%=dto.getPimage()%>" width="50px" height="50px"></td>
 				<td><%=dto.getPdetail() %></td>
@@ -157,8 +165,6 @@
 			List<ProductDTO> list = dao.getBoardList(param);
 			dao.close();
 			
-			//가격에 쉼표 찍는용도
-			NumberFormat numberFormat = NumberFormat.getInstance();
 			%>
 			<div id="listBox">
 			<%

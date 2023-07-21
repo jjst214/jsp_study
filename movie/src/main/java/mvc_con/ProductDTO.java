@@ -12,7 +12,14 @@ public class ProductDTO {
 	private String phit;
 	private String psell;
 	private String pimage2;
+	private String pcate;
 	
+	public String getPcate() {
+		return pcate;
+	}
+	public void setPcate(String pcate) {
+		this.pcate = pcate;
+	}
 	public String getPimage2() {
 		return pimage2;
 	}

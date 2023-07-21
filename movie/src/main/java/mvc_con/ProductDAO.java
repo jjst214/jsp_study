@@ -36,8 +36,8 @@ public class ProductDAO extends JDBCConnect {
 	//상품등록
 	public int addProduct(ProductDTO dto) {
 		int result = 0;
-		String sql = "insert into product(pid,pname,pprice,pstock,pimage,pdetail,pimage2)"
-				+ " values(seq_pid.nextval, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into product(pid,pname,pprice,pstock,pimage,pdetail,pimage2,pcate)"
+				+ " values(seq_pid.nextval, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			psmt = con.prepareStatement(sql);
 			psmt.setString(1, dto.getPname());
@@ -46,6 +46,7 @@ public class ProductDAO extends JDBCConnect {
 			psmt.setString(4, dto.getPimage());
 			psmt.setString(5, dto.getPdetail());
 			psmt.setString(6, dto.getPimage2());
+			psmt.setString(7, dto.getPcate());
 			result = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -91,12 +92,15 @@ public class ProductDAO extends JDBCConnect {
 	public int selectCount(Map<String, Object> map) {
 		int totalCount = 0;
 		String cate = map.get("cate").toString();
+		System.out.println(map.get("searchWord"));
 		//게시물 수를 얻어오는 쿼리작성
 		String sql = "select count(*) from product";
 		//검색 요청이 있을경우 where조건 추가
 		if(map.get("searchWord") != null) {
-			sql += " where pname like '%"
-					+ map.get("searchWord") + "%'";
+			sql += " where lower(pname) like LOWER('%"
+					+ map.get("searchWord") + "%') and"
+					+ " upper(pname) like upper('%"
+					+ map.get("searchWord") + "%')";
 		}else if(cate.equals("1")) {
 			sql += " where pcate=1 ";
 		}else if(cate.equals("2")) {
@@ -106,6 +110,7 @@ public class ProductDAO extends JDBCConnect {
 		}else if(cate.equals("4")) {
 			sql += " where pcate=4 ";
 		}
+		
 		try {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
@@ -121,13 +126,15 @@ public class ProductDAO extends JDBCConnect {
 	public List<ProductDTO> getBoardList(Map<String, Object> map){
 		List<ProductDTO> plist = new ArrayList<>();
 		String cate = map.get("cate").toString();
-		
+		System.out.println(map.get("searchWord"));
 		String sql = "select * from("
 				+ "select Tb.*, rownum rnum from ("
 				+ "select * from product ";
 		if(map.get("searchWord") != null) {
-			sql += " where pname like '%"
-					+ map.get("searchWord") + "%'";
+			sql += " where lower(pname) like LOWER('%"
+					+ map.get("searchWord") + "%') and"
+					+ " upper(pname) like upper('%"
+					+ map.get("searchWord") + "%')";
 		}else if(cate.equals("1")) {
 			sql += " where pcate=1 ";
 		}else if(cate.equals("2")) {
@@ -137,6 +144,7 @@ public class ProductDAO extends JDBCConnect {
 		}else if(cate.equals("4")) {
 			sql += " where pcate=4 ";
 		}
+		
 		sql += " order by pid desc) Tb"
 				+ ") where rnum between ? and ?";
 		try {
@@ -144,7 +152,6 @@ public class ProductDAO extends JDBCConnect {
 			psmt.setString(1, map.get("start").toString());
 			psmt.setString(2, map.get("end").toString());
 			rs = psmt.executeQuery();
-			System.out.println(sql);
 			while(rs.next()) {
 				ProductDTO dto = new ProductDTO();
 				dto.setPid(rs.getString(1));

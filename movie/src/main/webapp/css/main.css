@@ -2,6 +2,10 @@
 *{margin:0; padding:0; box-sizing:none;}
 a{text-decoration:none;}
 li{list-style:none;}
+table{border:none;}
+tr{border:none;}
+th{border:none;}
+td{border:none;}
 #wrap{
 	width:100%;
 }
@@ -33,4 +37,86 @@ span{font-size:14px;}
 .newest_items{
 	width:200px;
 	height:330px;
+}
+.titleArea{
+	padding:60px 0;
+	text-align:center;
+}
+#orderList{
+	width:100%;
+	height:30px;
+	background:#ccc;
+	display:flex;
+	justify-content:space-between;
+	padding:5px 10px;
+	align-items:center;
+	border-bottom:1.5px solid #000;
+}
+#orderList>h3{
+	font-size:12px;
+}
+#orderList>a{
+	display:inline-block;
+	width:80px;
+	height:25px;
+	line-height:25px;
+	background:#fff;
+	font-size:12px;
+	font-weight:bold;
+	text-align:center;
+}
+#orderList>a:hover{
+	color:#aaa;
+	transition:0.3s;
+}
+.selectOption{
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	padding: 15px 0;
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+}
+.selectOption h4{
+	font-size:13px;
+}
+.selectOption>span{
+	display:inline-block;
+	position:relative;
+	width:50px;
+	vertical-align:top;
+}
+#orderTable table{
+	width:100%;
+	border-collapse:collapse;
+	border-spacing:0;
+	text-align:center;
+}
+#orderTable table thead tr{
+	height:35px;
+}
+#orderTable table td{
+	margin:0 auto;
+	text-align:center;
+	padding:5px 0;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+#pcount{
+	width:22px;
+	height:23px;
+	line-height:23px;
+	padding: 0 2px 0 3px;
+	border:1px solid #ddd;
+	border-radius:3px 0 0 3px;
+}
+.up{
+	position:absolute;
+	top:0;
+	left:28px;
+}
+.down{
+	position:absolute;
+	top:12px;
+	left:28px;
 }

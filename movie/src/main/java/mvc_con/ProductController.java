@@ -28,7 +28,7 @@ public class ProductController extends HttpServlet {
 		if(type.equals("add")) {
 			resp.sendRedirect(req.getContextPath()+"/Add.jsp");
 		}else if(type.equals("manage")) {
-			resp.sendRedirect(req.getContextPath()+"/ProductList.jsp");
+			resp.sendRedirect(req.getContextPath()+"/mvc_con/list.do?cate=all");
 		}else if(type.equals("detail")) {
 			//상세보기시 폼에서 넘겨받은 상품번호를 상세화면 페이지에 담아 넘겨줌 
 			String num = req.getParameter("num");
@@ -65,7 +65,12 @@ public class ProductController extends HttpServlet {
 			dto.setPname(mr.getParameter("name"));
 			dto.setPprice(mr.getParameter("price"));
 			dto.setPstock(mr.getParameter("stock"));
-			dto.setPdetail(mr.getParameter("detail"));
+			if(mr.getParameter("detail") == null) {
+				dto.setPdetail("");
+			}else {
+				dto.setPdetail(mr.getParameter("detail"));
+			}
+			dto.setPcate(mr.getParameter("categori"));
 			
 			String file1 = mr.getFilesystemName("file1");
 			String file2 = mr.getFilesystemName("file2");

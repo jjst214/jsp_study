@@ -14,12 +14,8 @@ public class ServiceController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pid = req.getParameter("pid");
-		HttpSession pid_session = req.getSession();
-		pid_session.setAttribute("pid", pid);
-		
-		ProductDAO dao = new ProductDAO();
-		ProductDTO dto = dao.selectProduct(pid);
-		
+		HttpSession session = req.getSession();
+		session.setAttribute("pid", pid);
 		resp.sendRedirect(req.getContextPath()+"/order.jsp");
 	}
 	
