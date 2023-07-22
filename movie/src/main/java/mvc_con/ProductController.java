@@ -65,11 +65,7 @@ public class ProductController extends HttpServlet {
 			dto.setPname(mr.getParameter("name"));
 			dto.setPprice(mr.getParameter("price"));
 			dto.setPstock(mr.getParameter("stock"));
-			if(mr.getParameter("detail") == null) {
-				dto.setPdetail("");
-			}else {
-				dto.setPdetail(mr.getParameter("detail"));
-			}
+			dto.setPdetail(mr.getParameter("detail"));
 			dto.setPcate(mr.getParameter("categori"));
 			
 			String file1 = mr.getFilesystemName("file1");

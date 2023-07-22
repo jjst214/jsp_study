@@ -12,6 +12,22 @@
 #btm_section>input{
 	margin: 0 30px;
 }
+#btm_section>button:first-child{
+	text-align:right;
+	padding:5px 10px;
+	
+}
+.ad-tb{
+	border-collapse:collapse;
+	text-align:center;
+	width:80%;
+}
+.ad-tb tr:nth-child(1) td{
+	padding: 20px 0;
+}
+.pd-empty{
+	padding:100px;
+}
 .list{
 	margin: 0 auto;
 }
@@ -24,6 +40,8 @@
 }
 .list table td{
 	padding:3px;
+	border-top:1px solid #d5d5d5;
+	border-bottom:1px solid #d5d5d5;
 }
 .prdList{
 	display:flex;
@@ -62,17 +80,23 @@
 }
 #productInfo>div:nth-child(2) h2{
 	padding:30px 0;
+	border-bottom:1px solid #ccc;
 }
-#productInfo>div:nth-child(2) p{
+#productInfo>div:nth-child(2)>p{
 	display:block;
-	padding: 5px 0;
+	margin-top:15px;
+	font-size:15px;
+	width:300px;
+}
+.product-etc{
+	font-weight:bold;
 }
 #productInfo>div p:first-child{
 	border-top:1px solid #ccc;
 }
 #pimage{
-	width:470px;
-	height:470px;
+	width:550px;
+	height:550px;
 	border:1px solid #ccc;
 }
 #pimage img{
@@ -131,4 +155,22 @@
 	border-top:1px solid #ccc;
 	padding: 50px 0;
 	text-align:center;
+}
+.base-button{
+	display:flex;
+	align-items:center;
+	margin: 6px 10px;
+}
+#deleteBtn{
+	font-size:14px;
+	padding:4px 10px;
+	background:#ccc;
+	color:#fff;
+	margin:5px 10px;
+}
+#deleteBtn:hover{
+	transition:0.3s;
+	background:#fff;
+	color:#000;
+	border:1px solid #bbb;
 }

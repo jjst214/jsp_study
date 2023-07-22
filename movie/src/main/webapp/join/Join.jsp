@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header/header.jsp" %>
 	<form name="joinForm" method="post" 
-	action="../member/join.do" onsubmit="return validateForm(this)">
+	action="${pageContext.request.contextPath }/member/join.do" onsubmit="return validateForm(this)">
 		<table>
 			<tr>
 				<td>아이디</td>

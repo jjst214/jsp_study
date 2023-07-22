@@ -9,6 +9,14 @@ public class OrdersDTO {
 	private String opost;
 	private String oamount;
 	private String opayment;
+	private String oaddress;
+	
+	public String getOaddress() {
+		return oaddress;
+	}
+	public void setOaddress(String oaddress) {
+		this.oaddress = oaddress;
+	}
 	public String getOid() {
 		return oid;
 	}

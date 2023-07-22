@@ -13,7 +13,36 @@ td{border:none;}
 	max-width:1200px;
 	margin:0 auto;
 }
+.sign-in{
+	text-align:center;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items:center;
+}
+.sign-in h2{
+	padding:60px 0;
+}
+.sign-in form{
+	width:380px;
+	height:312px;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items:center;
+	border:1px solid #ccc;
+	margin-bottom:220px;
+}
+.sign-in form>div>table{
+	padding:10px 0;
+}
+.sign-in form>div>button{
+	width: 200px;
+	height:40px;
+	
+}
 #banner img{
+	width:100%;
 	height:620px;
 }
 .text{
@@ -28,7 +57,7 @@ span{font-size:14px;}
 	align-items:center;
 	justify-content:space-around;
 	width:100%;
-	height:360px;
+	height:270px;
 	margin-top:20px;
 	padding:10px 0;
 	background:#eee;
@@ -36,7 +65,34 @@ span{font-size:14px;}
 
 .newest_items{
 	width:200px;
-	height:330px;
+	height:270px;
+}
+.sub-title{
+	padding:30px 0;
+}
+
+#product2{
+	padding:40px 0;
+	height:500px;
+}
+.slide-items>div{
+	width:100%;
+	display:inline-block;
+}
+.slide-items a{
+	overflow:hidden;
+	display:inline-block;
+}
+.slide-items img{
+	width:250px;
+	height:250px;
+	transition:0.5s;
+}
+.slide-items img:hover{
+	scale:1.1;
+}
+#product2 .slick-slide{
+	margin:0 30px;
 }
 .titleArea{
 	padding:60px 0;
@@ -85,6 +141,9 @@ span{font-size:14px;}
 	position:relative;
 	width:50px;
 	vertical-align:top;
+}
+.olist{
+	min-height:550px;
 }
 #orderTable table{
 	width:100%;

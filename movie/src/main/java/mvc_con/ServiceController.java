@@ -7,16 +7,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-@WebServlet("/mvc_con/order.do")
+@WebServlet("/mvc_con/service.do")
 public class ServiceController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String pid = req.getParameter("pid");
-		HttpSession session = req.getSession();
-		session.setAttribute("pid", pid);
-		resp.sendRedirect(req.getContextPath()+"/order.jsp");
+		String viewType = req.getParameter("type");
+		
+		if(viewType.equals("olist")) {
+			resp.sendRedirect(req.getContextPath()+"/orderList.jsp");
+		}else if(viewType.equals("cart")) {
+			
+		}
 	}
 	
 }

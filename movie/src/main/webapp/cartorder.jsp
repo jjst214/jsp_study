@@ -8,9 +8,11 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/header/header.jsp" %>
 	<%
+	int totalPrice = 0;
 	String pid = session.getAttribute("pid").toString();
+	String qty = session.getAttribute("qty").toString();
 	CartDAO dao = new CartDAO();
-	List<CartDTO> lists = dao.selectCartList(session.getAttribute("UserId").toString());
+	List<CartDTO> lists = dao.selectCartList(sessionId);
 	//가격에 쉼표 찍는용도
 	NumberFormat numberFormat = NumberFormat.getInstance();
 	%>
@@ -26,6 +28,7 @@
 				<a href="#" onclick="history.back();">이전페이지</a>
 			</div>
 			<div id="orderTable">
+				<form method="post" action="">
 				<table border="1">
 					<thead>
 						<tr>
@@ -40,7 +43,6 @@
 					</thead>
 					<tbody>
 					<%
-						int totalPrice = 0;
 						for(CartDTO item:lists){
 						ProductDAO productDao = new ProductDAO();
 						ProductDTO productInfo = productDao.selectProduct(item.getPid());
@@ -49,7 +51,7 @@
 						%>
 						
 						<tr>
-							<td style="width:60px;"><input type="checkbox" name="chkbox" value="" onclick="checkSelectAll(this)"/></td>
+							<td style="width:60px;"><a href="#none" onclick="delete_check();"></a></td>
 							<td style="width:100px;"><img src="./uploads/<%=url %>/<%=productInfo.getPimage()%>" width=80px; height=80px;"></td>
 							<td style="width:600px;"><%=productInfo.getPname() %></td>
 							<td style="width:130px;"><%=productInfo.getPprice() %></td>
@@ -57,6 +59,7 @@
 							<td style="width:100px;">기본배송</td>
 							<td style="width:160px;"><%=numberFormat.format(Integer.parseInt(productInfo.getPprice()) * Integer.parseInt(item.getCcount()))%>원</td>
 						</tr>
+						
 					</tbody>
 					
 						<%
@@ -72,6 +75,7 @@
 						</tr>
 					</tfoot>
 				</table>
+				</form>
 				<div id="deletePdt">
 					
 				</div>
@@ -95,6 +99,20 @@
 	  checkboxes.forEach((checkbox) => {
 	    checkbox.checked = selectAll.checked
 	  })
+	}
+	function delete_check(){
+		const checkboxes = 'input[name="chkbox"]:checked';
+		const selected = document.querySelectorAll(checkboxes);
+		if(selected.length == 0){
+			alert("삭제 할 상품을 선택해주세요.");
+			return false;
+		}else{
+			if(!confirm("정말 삭제하시겠습니까?")){
+				return false;
+			}else{
+				location.href('${pageContext.request.contextPath }/index.jsp?sel='+selected);
+			}
+		}
 	}
 </script>
 <%@ include file="/footer/footer.jsp" %>

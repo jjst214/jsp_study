@@ -26,10 +26,13 @@
 					<img src="uploads/<%=url %>/<%=dto.getPimage()%>"/>
 				</div>
 				<div>
-					<h2><%=dto.getPname() %></h2>
-					<p style="font-weight:bold;"><span>가격</span>&emsp;&emsp;<%=numberFormat.format(Integer.parseInt(dto.getPprice())) %>원</p>
-					<p style="font-weight:bold;"><span>재고</span>&emsp;&emsp;<%=dto.getPstock() %></p>
-					<p>상품설명</p>
+					<h2 class="title"><%=dto.getPname() %></h2>
+					<p><span class="product-etc">가격</span>&emsp;&emsp;<%=numberFormat.format(Integer.parseInt(dto.getPprice())) %>원</p>
+					<c:if test="${sessionScope.Grade eq '5' or sessionScope.Grade eq '10'}">
+					<p><span class="product-etc">재고</span>&emsp;&emsp;<%=dto.getPstock() %></p>
+					</c:if>
+					<p><span class="product-etc">배송방법</span>&emsp;&emsp; 택배</p>
+					<p><span class="product-etc">상품설명</span></p>
 					<textarea rows="20" cols="60" id="detailArea" readonly><%=dto.getPdetail() %></textarea>
 					<c:choose>
 					<c:when test="${sessionScope.Grade eq '5' || sessionScope.Grade eq '10' }">
@@ -62,17 +65,20 @@
 		<script>
 			//제품 구매 시 로그인 여부 체크
 			function loginChk(e){
-				let isLogin = "<%=sessionId%>";
-				
-				if(isLogin == null){
-					location.href="${pageContext.request.contextPath }/member/login.do";
+				let isLogin = "<%=session.getAttribute("UserId")%>";
+				let qty = document.querySelector("#pcount").value;
+				const buyUrl = "<%=request.getContextPath()%>/mvc_con/directorder.do?pid=<%=dto.getPid()%>&qty=";
+				const addcartUrl = "${pageContext.request.contextPath }/mvc_con/cart.do?mid=<%=sessionId%>&pid=<%=dto.getPid()%>&type=add&qty=";
+				if(isLogin == null || isLogin == "null"){
+					location.href='${pageContext.request.contextPath }/member/login.do';
 				}else{
 					if(e.id == "buy"){
 						//구매 버튼을 클릭하면 주문화면으로 이동
-						location.href="${pageContext.request.contextPath }/mvc_con/order.do?pid=<%=dto.getPid()%>";	
+						location.href=buyUrl+qty;
+						
 					}else{
 						//장바구니 버튼 클릭이면 카트에 추가 
-						location.href="${pageContext.request.contextPath }/mvc_con/addcart.do";
+						location.href=addcartUrl+qty;
 					}
 				}
 			}

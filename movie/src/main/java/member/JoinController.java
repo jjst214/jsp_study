@@ -1,6 +1,7 @@
 package member;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,14 +28,19 @@ public class JoinController extends HttpServlet{
 		dto.setmNAME(req.getParameter("name"));
 		dto.setmBIRTH(req.getParameter("year")+"-"+req.getParameter("month")+"-"+req.getParameter("day"));
 		dto.setmPOST(req.getParameter("postcode"));
-		dto.setmADDRESS(req.getParameter("address")+req.getParameter("detailAddress"));
+		dto.setmADDRESS(req.getParameter("address")+"/"+req.getParameter("detailAddress"));
 		dto.setmPHONE(req.getParameter("phone1")+req.getParameter("phone2")+req.getParameter("phone3"));
 				
 		int result = dao.insertMember(dto);
 		if(result == 1) {
-			resp.sendRedirect("index.do");
+			resp.setContentType("text/html; charset=UTF-8");
+			PrintWriter pw = resp.getWriter();
+			pw.println("<script>");
+			pw.println("alert('회원가입이 완료되었습니다.');");
+			pw.println("location.href='"+req.getContextPath()+"/index.jsp';");
+			pw.println("</script>");
 		}else {
-			resp.sendRedirect("join.do");
+			resp.sendRedirect(req.getContextPath()+"/member/join.do");
 		}
 	}
 	

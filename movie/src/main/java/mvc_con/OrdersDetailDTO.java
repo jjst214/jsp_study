@@ -4,7 +4,8 @@ public class OrdersDetailDTO {
 	private String odid;
 	private String oid;
 	private String pid;
-	private String pcount;
+	private String odqty;
+	
 	public String getOdid() {
 		return odid;
 	}
@@ -23,12 +24,13 @@ public class OrdersDetailDTO {
 	public void setPid(String pid) {
 		this.pid = pid;
 	}
-	public String getPcount() {
-		return pcount;
+	public String getOdqty() {
+		return odqty;
 	}
-	public void setPcount(String pcount) {
-		this.pcount = pcount;
+	public void setOdqty(String odqty) {
+		this.odqty = odqty;
 	}
+	
 	
 	
 }

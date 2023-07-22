@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+#orderTable thead tr{
+	font-size:15px;
+}
+.empty{
+	height:500px;
+	font-weight:bold;
+}

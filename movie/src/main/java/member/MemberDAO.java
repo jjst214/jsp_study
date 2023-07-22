@@ -7,20 +7,24 @@ import java.util.List;
 import common.JDBCConnect;
 
 public class MemberDAO extends JDBCConnect{
-		public String getMemberName(String id) {
-			String sql = "select mname from member where mID=?";
-			String userName = "";
+		public MemberDTO getMemberInfo(String id) {
+			String sql = "select mid,mname,maddress,mpost,mphone from member where mID=?";
+			MemberDTO dto = new MemberDTO();
 			try {
 				psmt = con.prepareStatement(sql);
 				psmt.setString(1, id);
 				rs = psmt.executeQuery();
 				if(rs.next()) {
-					userName = rs.getString("mname");
+					dto.setmID(rs.getString("mid")); 
+					dto.setmNAME(rs.getString("mname")); 
+					dto.setmADDRESS(rs.getString("maddress")); 
+					dto.setmPOST(rs.getString("mpost")); 
+					dto.setmPHONE(rs.getString("mphone")); 
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			return userName;
+			return dto;
 		}
 		//아이디와 패스워드에 일치하는 회원정보를 반환
 		public MemberDTO getMemberDTO(String id, String pass) {

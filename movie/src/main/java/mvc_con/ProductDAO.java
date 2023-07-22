@@ -92,7 +92,6 @@ public class ProductDAO extends JDBCConnect {
 	public int selectCount(Map<String, Object> map) {
 		int totalCount = 0;
 		String cate = map.get("cate").toString();
-		System.out.println(map.get("searchWord"));
 		//게시물 수를 얻어오는 쿼리작성
 		String sql = "select count(*) from product";
 		//검색 요청이 있을경우 where조건 추가
@@ -126,26 +125,25 @@ public class ProductDAO extends JDBCConnect {
 	public List<ProductDTO> getBoardList(Map<String, Object> map){
 		List<ProductDTO> plist = new ArrayList<>();
 		String cate = map.get("cate").toString();
-		System.out.println(map.get("searchWord"));
 		String sql = "select * from("
-				+ "select Tb.*, rownum rnum from ("
+				+ "select Tb.*,rownum rnum from("
 				+ "select * from product ";
 		if(map.get("searchWord") != null) {
-			sql += " where lower(pname) like LOWER('%"
+			sql += "where lower(pname) like LOWER('%"
 					+ map.get("searchWord") + "%') and"
 					+ " upper(pname) like upper('%"
 					+ map.get("searchWord") + "%')";
 		}else if(cate.equals("1")) {
-			sql += " where pcate=1 ";
+			sql += "where pcate=1 ";
 		}else if(cate.equals("2")) {
-			sql += " where pcate=2 ";
+			sql += "where pcate=2 ";
 		}else if(cate.equals("3")) {
-			sql += " where pcate=3 ";
+			sql += "where pcate=3 ";
 		}else if(cate.equals("4")) {
-			sql += " where pcate=4 ";
+			sql += "where pcate=4 ";
 		}
 		
-		sql += " order by pid desc) Tb"
+		sql += "order by pid desc) Tb"
 				+ ") where rnum between ? and ?";
 		try {
 			psmt = con.prepareStatement(sql);
@@ -168,7 +166,6 @@ public class ProductDAO extends JDBCConnect {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return plist;
 	}
 }

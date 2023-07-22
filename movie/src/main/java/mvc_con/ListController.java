@@ -15,15 +15,11 @@ public class ListController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String cate = req.getParameter("cate");
 		String word = req.getParameter("searchWord");
-		System.out.println(word + cate);
 		if(word != null) {
 			resp.sendRedirect(req.getContextPath()+"/ProductList.jsp?&cate="+cate+"&searchWord="+word+"");
 		}else {
 			resp.sendRedirect(req.getContextPath()+"/ProductList.jsp?&cate="+cate+"");
 		}
-		
-		
-		
 		
 	}
 	

@@ -16,6 +16,7 @@
 
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+
 <%
 	//로그인 세션 받아오기
 	String sessionId = (String)session.getAttribute("UserId");
@@ -23,9 +24,9 @@
 	if(grade == null){
 		grade = "0";
 	}
-	MemberDAO mname = new MemberDAO();
-	String name = mname.getMemberName(sessionId);
-	mname.close();
+	MemberDAO nameDAO = new MemberDAO();
+	MemberDTO nameDTO = nameDAO.getMemberInfo(sessionId);
+	nameDAO.close();
 %>
 
 </head>
@@ -50,12 +51,18 @@
 					//sessionId가 있다면 --> 1:고객 로그인 / 5,10:관리자 로그인
 					if(grade.equals("1")){
 						%>
-						<li><%=name %>&nbsp;님</li>
+						<li><%=nameDTO.getmNAME() %>&nbsp;님</li>
 						<li><a href="${pageContext.request.contextPath }/member/logout.do">로그아웃</a></li>
 						<span>&nbsp;|&nbsp;</span>
 						<li><a href="#">회원정보</a></li>
 						<span>&nbsp;|&nbsp;</span>
-						<li><a href="#">마이페이지</a></li>
+						<li id="drop">
+							<a href="#">마이페이지</a>
+							<ul class="header-drop">
+								<li><a href="${pageContext.request.contextPath }/mvc_con/service.do?type=cart">장바구니</a></li>
+								<li><a href="${pageContext.request.contextPath }/mvc_con/service.do?type=olist">주문내역</a></li>
+							</ul>
+						</li>
 						<%
 					}else if(grade.equals("10") || grade.equals("5")){
 						%>

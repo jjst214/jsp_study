@@ -22,7 +22,15 @@ $( document ).ready( function() {
 			}
 		}
 	});
-
+	
+	$(".slide-items").slick({
+		dots:false,
+		slidesToShow: 4,
+		slidesToScroll: 1,
+		autoplay:true,
+		autoplaySpeed:3500,
+		arrows:false
+	});
 });
 
 

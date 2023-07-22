@@ -11,7 +11,8 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	ListDAO dao = new ListDAO();
-	List<ProductDTO> lists = dao.selectListPage();
+	List<ProductDTO> nlists = dao.selectListPage("new");
+	List<ProductDTO> blists = dao.selectListPage("best");
 	dao.close();
 %>
 <div id="wrap">
@@ -23,10 +24,9 @@
 			<div><a href="#"><img src="images/mainSlide6.jpg" width=100%></a></div>
 		</div>
 	</section>
-	
-	<div class="text inner"><h2 class="non-cursor">신상품</h2><span><a href="${pageContext.request.contextPath }/mvc_con/list.do?cate=all">더 보기</a></span></div>
+	<div class="text inner"><h2 class="non-cursor">NEW ITEMS</h2><span><a href="${pageContext.request.contextPath }/mvc_con/list.do?cate=all">더 보기</a></span></div>
 	<section id="product1" class="inner">
-	<c:set var="lists" value="<%=lists%>" />
+	<c:set var="lists" value="<%=nlists%>" />
 		<c:choose>
 			<c:when test="${empty lists}">
 				<h2>등록된 상품이 없습니다.</h2>
@@ -44,6 +44,31 @@
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
+	</section>
+	<section id="product2" class="inner">
+		<h2 class="sub-title">BEST ITEMS</h2>
+		<div class="slide-items">
+			
+			<c:set var="lists" value="<%=blists%>" />
+			<c:choose>
+				<c:when test="${empty lists}">
+					<div><h2>등록된 상품이 없습니다.</h2></div>
+					
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${lists}" var="items" varStatus="loop">
+					<c:set var="producturl" value="${fn:split(items.pimage, '.') }"/>
+					<div>
+						<a href="${pageContext.request.contextPath }/mvc_con/product.do?p_type=detail&num=${items.pid}">
+							<img src="./uploads/${producturl[fn:length(producturl)-2]}/${items.pimage}" width="250px" height="250px" />
+						</a>
+						<span>${items.pname }</span><br>
+						<span><fmt:formatNumber value="${items.pprice}" pattern="#,###" />원</span>
+					</div>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+		</div>
 	</section>
 </div>
 <%@ include file="/footer/footer.jsp" %>
