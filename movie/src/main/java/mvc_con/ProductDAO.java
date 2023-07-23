@@ -168,4 +168,21 @@ public class ProductDAO extends JDBCConnect {
 		}
 		return plist;
 	}
+	
+	//상품 판매시 psell 팔린 갯수만큼+  pstock-
+	public int sell(String pid, String qty) {
+		int result = 0;
+		String sql = "update product set psell=psell+?, pstock=pstock-? where pid=?";
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, qty);
+			psmt.setString(2, qty);
+			psmt.setString(3, pid);
+			
+			result = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

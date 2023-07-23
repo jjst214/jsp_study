@@ -8,15 +8,18 @@
 		<div>
 			<table>
 				<tr>
-					<td>아이디</td>
-					<td><input type="text" name="id" id="id"></td>
+					<td><input type="text" name="id" id="id" placeholder="아이디"></td>
 				</tr>
 				<tr>
-					<td>비밀번호</td>
-					<td><input type="password" name="pwd"></td>
+					<td><input type="password" name="pwd" id="pwd" placeholder="비밀번호"></td>
 				</tr>
 			</table>
 			<button type="submit">로그인</button>
+			<ul>
+				<li><a href="${pageContext.request.contextPath }/member/join.do">회원가입</a></li>
+				<li><a href="#">아이디찾기</a></li>
+				<li><a href="#">비밀번호찾기</a></li>
+			</ul>
 		</div>
 	</form>
 </div>

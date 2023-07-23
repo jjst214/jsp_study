@@ -40,6 +40,7 @@ public class OrdersDetailDAO extends JDBCConnect {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return result;
 	}
 }

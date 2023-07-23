@@ -17,7 +17,7 @@ public class ServiceController extends HttpServlet {
 		if(viewType.equals("olist")) {
 			resp.sendRedirect(req.getContextPath()+"/orderList.jsp");
 		}else if(viewType.equals("cart")) {
-			
+			resp.sendRedirect(req.getContextPath()+"/cartList.jsp");
 		}
 	}
 	

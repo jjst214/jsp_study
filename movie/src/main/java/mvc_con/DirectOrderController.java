@@ -43,7 +43,9 @@ public class DirectOrderController extends HttpServlet {
 		String qty = req.getParameter("qty");
 		String total = req.getParameter("total");
 		String pid = req.getParameter("pid");
-		int queryResult = 0;
+		int orderResult = 0;
+		int detailResult = 0;
+		int sellResult = 0;
 		PrintWriter pw = resp.getWriter();
 		
 		OrdersDAO odao = new OrdersDAO();
@@ -55,20 +57,24 @@ public class DirectOrderController extends HttpServlet {
 		odto.setOpost(postcode);
 		odto.setOamount(total);
 		odto.setOpayment(paytype);
-		queryResult = odao.insertOrders(odto);
+		orderResult = odao.insertOrders(odto);
 		odao.close();
-		if(queryResult == 0) {
+		if(orderResult == 0) {
 			pw.println("<script>");
 			pw.println("alert('주문 도중 오류가 발생했습니다. 상품 페이지로 이동합니다.1');");
 			pw.println("location.href='"+req.getContextPath()+"/mvc_con/list.do?cate=all'");
 			pw.println("</script>");
 			pw.close();
 		}else {
-			int result = 0;
+			
 			OrdersDetailDAO ddao = new OrdersDetailDAO();
-			result = ddao.addOrderDetail(pid, qty);
+			detailResult = ddao.addOrderDetail(pid, qty);
 			ddao.close();
-			if(result != 0) {
+			ProductDAO pdao = new ProductDAO();
+			sellResult = pdao.sell(pid, qty);
+			pdao.close();
+			
+			if(detailResult != 0 && sellResult != 0) {
 				pw.println("<script>");
 				pw.println("alert('주문이 완료되었습니다.');");
 				pw.println("location.href='"+req.getContextPath()+"/mvc_con/service.do?type=olist'");

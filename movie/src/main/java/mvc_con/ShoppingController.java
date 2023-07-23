@@ -43,7 +43,7 @@ public class ShoppingController extends HttpServlet {
 			}else {
 				pw.println("<script>");
 				pw.println("alert('장바구니에 이미 존재하는 상품입니다.');");
-				pw.println("location.href='"+req.getContextPath()+"/basket.jsp'");
+				pw.println("location.href='"+req.getContextPath()+"/mvc_con/service.do?type=cart'");
 				pw.println("</script>");
 			}
 			

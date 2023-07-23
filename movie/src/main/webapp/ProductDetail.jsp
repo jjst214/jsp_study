@@ -43,7 +43,7 @@
 					<div class="selectOption">
 						<h4><%=dto.getPname() %></h4>
 						<span>
-							<input type="text" value="1" id="pcount">
+							<input type="text" value="1" id="pcount" onblur="qty_focusout();">
 							<a href="#none" onclick="count('up');"><img src="https://img.echosting.cafe24.com/skin/base_ko_KR/product/btn_count_up.gif" class="up"></a>
 							<a href="#none" onclick="count('down');"><img src="https://img.echosting.cafe24.com/skin/base_ko_KR/product/btn_count_down.gif" class="down"></a>
 						</span>
@@ -86,22 +86,31 @@
 			function count(type){
 				let total = document.querySelector("#totalPrice");
 				let count = document.querySelector("#pcount");
-				let num = count.value;
 				
 				let price = <%=dto.getPprice()%>;
 				
 				if(type === 'up'){
-					num = Number(num) + 1;
-					count.value = num;
+					count.value = Number(count.value) + 1;
 				}else if(type === 'down'){
-					if(num != 1){
-						num = Number(num) - 1;
-						count.value = num;
+					if(count.value != 1){
+						count.value = Number(count.value) - 1;
 					}
 				}
-				let result = Number(price) * Number(num);
+				let result = Number(price) * Number(count.value);
 				let format = result.toLocaleString();
 				total.innerHTML = format+"원";	
+			}
+			function qty_focusout(){
+				let qty = document.querySelector("#pcount");
+				let total = document.querySelector("#totalPrice");
+				let price = <%=dto.getPprice()%>;
+				
+				if(qty.value < 1){
+					qty.value = 1;
+				}
+				let result = Number(price) * Number(qty.value);
+				let format = result.toLocaleString();
+				total.innerHTML = format+"원";
 			}
 		</script>
 		<%

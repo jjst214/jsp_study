@@ -44,7 +44,7 @@ public class CartDAO extends JDBCConnect {
 	public List<CartDTO> selectCartList(String mid){
 		List<CartDTO> list = new ArrayList<>();
 		
-		String sql = "select * from cart where mid=?";
+		String sql = "select * from cart where mid=? order by cid";
 		System.out.println(sql);
 		try {
 			psmt = con.prepareStatement(sql);
