@@ -85,7 +85,7 @@ input{
 	line-height:14px;
 	color:red;
 }
-#orderWrite td{
+#orderWrite>form>table td{
 	width:90%;
 	border-bottom:1px solid #ccc;
 	padding:15px 20px;
@@ -95,15 +95,31 @@ input{
 	margin-top:10px;
 	width:100%;
 	border:1px solid #777;
+	position:relative;
+	overflow:hidden;
+}
+.payArea .total{
+	float:right;
+	width:340px;
+	border-left:1px solid #777;
+	height:200px;
+}
+#payment-dv{
+	float:left;
+	width:859px;
+	height:200px;
 }
 .payment .payment-type{
 	width:100%;
-	padding:17px 20px 15px;
+	padding:17px 0 15px 0;
 	font-weight:bold;
 	font-size:15px;
 	border-bottom:3px double #dedede;
 	display:flex;
 	align-items:center;
+}
+.payment .payment-type div:first-child{
+	margin-left:20px;
 }
 .payment .payment-type div{
 	padding: 0 10px;
@@ -111,4 +127,55 @@ input{
 .payment .payment-type input{
 	vertical-align:middle;
 	margin-right:3px;
+}
+.payment-form{
+	display:block;
+}
+.payment-form>div{
+	padding:15px;
+}
+.payment-form table tr td{
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+.payment-form table tr td:first-child{
+	width:150px;
+	padding:10px;
+	border-right: 1px solid #ccc;
+	background:#d7d7d7;
+}
+.payment-form table tr td input{
+	width:100px;
+	margin-left:20px;
+}
+.payment-form table tr td select{
+	width:500px;
+	margin-left:20px;
+}
+.total>h4{
+	text-align:right;
+	padding:15px;
+	font-weight:normal;
+}
+.total .type-1.price{
+	color:#008bcc;
+	text-align:right;
+}
+.current_pay_price{
+	padding:5px 15px 20px 0;
+	font-size:26px;
+}
+.order-btns{
+	text-align:right;
+	margin-bottom:30px;
+}
+.order-btns input{
+	padding: 3px 20px;
+	height:30px;
+}
+.order-btns input:hover{
+	cursor:pointer;
+	background:black;
+	color:#fff;
+	transition:0.4s;
 }

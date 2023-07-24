@@ -83,7 +83,7 @@
 				<li><a href="${pageContext.request.contextPath }/mvc_con/list.do?cate=2">간식</a></li>
 				<li><a href="${pageContext.request.contextPath }/mvc_con/list.do?cate=3">패션</a></li>
 				<li><a href="${pageContext.request.contextPath }/mvc_con/list.do?cate=4">장난감/훈련용품</a></li>
-				<li><a href="#">QnA</a></li>
+				<li><a href="${pageContext.request.contextPath }/qna/qna.do">QnA</a></li>
 			</ul>
 		</nav>
 	</header>

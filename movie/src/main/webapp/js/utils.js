@@ -31,6 +31,15 @@ $( document ).ready( function() {
 		autoplaySpeed:3500,
 		arrows:false
 	});
+	
+	$('input[type="radio"][id="pay1"]').on('click',function(){
+		let chkValue = $('input[type="radio"][id="pay1"]:checked').val();
+		if(chkValue){
+			$('.payment-form').css('display','block');
+		}else{
+			$('.payment-form').css('display','none');
+		}
+	});
 });
 
 

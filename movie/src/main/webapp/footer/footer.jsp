@@ -12,5 +12,5 @@
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="js/utils.js"></script>
+<script src="${pageContext.request.contextPath}/js/utils.js"></script>
 </html>

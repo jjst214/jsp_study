@@ -112,17 +112,60 @@
 				</table>
 				<h5 class="delInfo">결제수단</h5>
 				<div class="payArea">
-					<div class="payment">
+					<div class="payment" id="payment-dv">
 						<div class="payment-type">
 							<div><input type="radio" id="pay1" name="payment" value="1" checked>무통장입금</div>
 							<div><input type="radio" id="pay2" name="payment" value="2">신용/체크카드</div>
 							<div><input type="radio" id="pay3" name="payment" value="3">카카오페이</div>
 						</div>
 						<div class="payment-form">
-							
+							<div class="paytype1">
+								<table border="1">
+									<tr>
+										<td>입금자명</td>
+										<td><input type="text" value="<%=mdto.getmNAME()%>" disabled></td>
+									</tr>
+									<tr>
+										<td>입금은행</td>
+										<td>
+											<select id="bankaccount" name="bankaccount">
+												<option value="-1">::: 선택해 주세요. :::</option>
+												<option value="bank_01:1348941668164">국민은행:1348941668164 장재근</option>
+												<option value="bank_01:646855132702137">신협:646855132702137 임종하</option>
+											</select>
+										</td>
+									</tr>
+								</table>
+							</div>
+							<div class="paytype2">
+								<table border="1">
+									
+									<tr>
+										<td>카드선택</td>
+										<td>
+											<select id="bankcard" name="bankcard">
+												<option value="-1">카드를 선택해주세요.</option>
+												<option value="삼성카드">삼성카드</option>
+												<option value="신한카드">신한카드</option>
+												<option value="KB국민카드">KB국민카드</option>
+												<option value="현대카드">현대카드</option>
+												<option value="비씨카드">비씨카드</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>입금자명</td>
+										<td><input type="text" value="<%=mdto.getmNAME()%>" disabled></td>
+									</tr>
+								</table>
+							</div>
 						</div>
 					</div>
 					<div class="total">
+						<div class="total type-1 price">
+							<h4 id="rprice">무통장입금 최종결제 금액</h4>
+							<p class="current_pay_price"><%=numberFormat.format(totalPrice) %><span>원</span></p>
+						</div>
 					</div>
 				</div>
 				<div class="order-btns">
@@ -132,8 +175,21 @@
 			</div>
 		</div>
 	</div>
-	
+	<%@ include file="/footer/footer.jsp" %>
 	<script>
+	$("input[name='payment']").change(function(){
+		let chkValue = $("input[name='payment']:checked").val();
+		if(chkValue == 1){
+			$('.paytype1').css('display','block');
+			$('#rprice').text("무통장입금 최종결제 금액");
+		}else if(chkValue == 2){
+			$('.paytype1').css('display','none');
+			$('#rprice').text("신용카드 최종결제 금액");
+		}else{
+			$('.paytype1').css('display','none');
+			$('#rprice').text("카카오페이 최종결제 금액");
+		}
+	});
 	function toggle(e){
 		let name = document.getElementById('name');
 		let post = document.getElementById('sample6_postcode');
@@ -218,6 +274,7 @@
     }
 	
 	function validateForm(form) {
+		let radio = document.querySelector('input[name="payment"]:checked').value;
 		if(form.name.value == "") {
 			alert("이름을 입력하세요");
 			form.name.focus();
@@ -238,11 +295,18 @@
 			form.phone1.focus();
 			return false;
 		}
-		if(form.pwd.value != form.pwd2.value) {
-			alert("비밀번호가 일치하지 않습니다");
-			form.pwd2.focus();
-			return false;
+		if(radio == "1"){
+			let val = document.querySelector("#bankaccount");
+			if(val.value == "-1"){
+				alert("결제유형을 선택해주세요.");
+				return false;
+			}
+		}else if(radio == "2"){
+			let val = document.querySelector("#bankcard");
+			if(val.value == "-1"){
+				alert("결제하실 카드를 선택해주세요.");
+				return false;
+			}
 		}
 	}
 </script>
-<%@ include file="/footer/footer.jsp" %>
