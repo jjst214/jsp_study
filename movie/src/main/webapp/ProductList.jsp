@@ -106,7 +106,16 @@
 				<td><%=numberFormat.format(Integer.parseInt(dto.getPprice())) %></td>
 				<td><%=dto.getPstock() %></td>
 				<td><img src="uploads/<%=url %>/<%=dto.getPimage()%>" width="50px" height="50px"></td>
-				<td><%=dto.getPdetail() %></td>
+				<td><%if(dto.getPdetail() == null){
+						%>&nbsp;<%
+					  }else{
+						  %>
+						  <%=dto.getPdetail() %>
+						  <%
+					  }
+					
+					%></td>
+				}
 				<td><%=dto.getPrdate() %></td>
 				<td><%=dto.getPsell() %></td>
 			</tr>
@@ -176,7 +185,16 @@
 				
 				%>
 				<div id="list_title" class="inner">
-					<h2 style="text-align:center; padding:40px 0;">전체 상품 목록</h2>
+					<h2 style="text-align:center; padding:40px 0;">
+						<c:set var="cate" value="<%=String.valueOf(cate) %>"></c:set>
+						<c:choose>
+							<c:when test="${cate eq '1' }">사료</c:when>
+							<c:when test="${cate eq '2' }">간식</c:when>
+							<c:when test="${cate eq '3' }">패션</c:when>
+							<c:when test="${cate eq '4' }">장난감/훈련용품</c:when>						
+							<c:otherwise>전체 상품 목록</c:otherwise>
+						</c:choose>
+					</h2>
 					<div>
 						<span>TOTAL <%=selectCount %> ITEMS</span>
 						<ul>
@@ -195,7 +213,16 @@
 						<img src="uploads/<%=url%>/<%=dto.getPimage() %>" width="100%" height="270px"></a>
 						<a href="${pageContext.request.contextPath }/mvc_con/product.do?p_type=detail&num=<%=dto.getPid()%>" style="height:60px; display:block;">
 						<%=dto.getPname() %></a>
-						<p style="color: #ff7267; font-weight:520;"><%=dto.getPdetail() %></p>
+						<p style="color: #ff7267; font-weight:520;">
+						<%if(dto.getPdetail() == null){
+							%>&nbsp;<%
+						  }else{
+							  %>
+							  <%=dto.getPdetail() %>
+							  <%
+						  }
+						%>
+						</p>
 						<p style="font-weight:bold;">
 						<%=numberFormat.format(Integer.parseInt(dto.getPprice())) %>원</p>
 					</li>
