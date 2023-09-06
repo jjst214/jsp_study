@@ -125,10 +125,13 @@ public class ProductDAO extends JDBCConnect {
 	public List<ProductDTO> getBoardList(Map<String, Object> map){
 		List<ProductDTO> plist = new ArrayList<>();
 		String cate = map.get("cate").toString();
+		if(cate== null) {
+			cate = "all";
+		}
 		String sql = "select * from("
 				+ "select Tb.*,rownum rnum from("
 				+ "select * from product ";
-		if(map.get("searchWord") != null) {
+		if(map.get("searchWord") != null && cate.equals("all")) {
 			sql += "where lower(pname) like LOWER('%"
 					+ map.get("searchWord") + "%') and"
 					+ " upper(pname) like upper('%"
@@ -143,7 +146,7 @@ public class ProductDAO extends JDBCConnect {
 			sql += "where pcate=4 ";
 		}
 		
-		sql += "order by pid desc) Tb"
+		sql += " order by pid desc) Tb"
 				+ ") where rnum between ? and ?";
 		try {
 			psmt = con.prepareStatement(sql);

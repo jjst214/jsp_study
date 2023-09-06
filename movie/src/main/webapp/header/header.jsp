@@ -36,6 +36,7 @@
 			<h1><a href="${pageContext.request.contextPath }/index.jsp">로고</a></h1>
 			<form method="get" action="${pageContext.request.contextPath }/mvc_con/list.do" id="searchForm">
 				<input type="hidden" name="cate" value="all">
+				<input type="hidden" name="searchField" value="pname">
 				<input type="text" name="searchWord" id="searchWord" placeholder="상품명을 검색해보세요"/>
 			</form>
 			<ul>

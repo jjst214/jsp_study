@@ -148,8 +148,6 @@ public class ProductController extends HttpServlet {
 					pr.println("</script>");
 					pr.close();
 				}
-					
-				
 				
 			}
 		}else if(type.equals("edit")) {

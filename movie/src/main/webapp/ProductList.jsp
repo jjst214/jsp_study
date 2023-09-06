@@ -68,7 +68,9 @@
 		%>
 		<title>상품 관리 페이지</title>
 		<h2>상품 목록(관리자)</h2>
-		<table border="1" class="ad-tb">
+		<button type="button" onclick="location.href='${pageContext.request.contextPath }/mvc_con/product.do?p_type=add'"
+		style="padding:5px 10px; position:absolute; bottom:30px; right:120px;">새 상품등록</button>
+		<table border="1" style="border-collapse:collapse; text-align:center;">
 			<tr>
 				<td style="width:30px;"><input type="checkbox" name="selectall" value="selectall" onclick="selectAll(this)"></td>
 				<td style="width:65px;">상품번호</td>
@@ -86,8 +88,8 @@
 		<%
 		if(list.isEmpty()){
 			%>
-			<tr class="pd-empty">
-				<td colspan="9">상품이 존재하지 않습니다.</td>
+			<tr>
+				<td colspan="6">글이 존재하지 않습니다.</td>
 			</tr>
 		
 			<%
@@ -114,7 +116,6 @@
 		%>
 		</table>
 		<div id="btm_section">
-			<button type="button" onclick="location.href='${pageContext.request.contextPath }/mvc_con/product.do?p_type=add'">새 상품등록</button>
 			<input type="submit" value="선택상품 삭제">
 			</form>
 			<form method="get">

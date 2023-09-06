@@ -15,8 +15,9 @@ public class ListController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String cate = req.getParameter("cate");
 		String word = req.getParameter("searchWord");
+		String field = req.getParameter("field"); 
 		if(word != null) {
-			resp.sendRedirect(req.getContextPath()+"/ProductList.jsp?&cate="+cate+"&searchWord="+word+"");
+			resp.sendRedirect(req.getContextPath()+"/ProductList.jsp?cate="+cate+"&searchWord="+word+"&searchField="+field+"");
 		}else {
 			resp.sendRedirect(req.getContextPath()+"/ProductList.jsp?&cate="+cate+"");
 		}
