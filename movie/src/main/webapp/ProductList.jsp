@@ -82,8 +82,6 @@
 				<td>상품등록일</td>
 				<td style="width:100px;">판매량</td>
 			</tr>
-		<%
-		%>
 		<form action="${pageContext.request.contextPath }/mvc_con/product.do?p_type=delete" method="post" name="deleteForm">
 		<%
 		if(list.isEmpty()){
@@ -91,7 +89,6 @@
 			<tr>
 				<td colspan="6">글이 존재하지 않습니다.</td>
 			</tr>
-		
 			<%
 		}else{
 			
@@ -106,16 +103,18 @@
 				<td><%=numberFormat.format(Integer.parseInt(dto.getPprice())) %></td>
 				<td><%=dto.getPstock() %></td>
 				<td><img src="uploads/<%=url %>/<%=dto.getPimage()%>" width="50px" height="50px"></td>
-				<td><%if(dto.getPdetail() == null){
+				<td>
+					<%
+					  if(dto.getPdetail() == null){
 						%>&nbsp;<%
 					  }else{
 						  %>
 						  <%=dto.getPdetail() %>
 						  <%
 					  }
-					
-					%></td>
-				}
+					%>
+				</td>
+				
 				<td><%=dto.getPrdate() %></td>
 				<td><%=dto.getPsell() %></td>
 			</tr>
