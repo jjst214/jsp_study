@@ -59,7 +59,7 @@
 			</select>
 			<input name="searchWord" type="text" />
 			<input type="submit" value="검색">
-			<button type="button" onclick="location.href='${pageContext.request.contextPath }/qna/QnaWrite.do'">글쓰기</button>
+			<button type="button" onclick="isLogin(event)">글쓰기</button>
 		</form>
 	</div>
 	
@@ -68,4 +68,17 @@
 	</div>
 	<%@ include file="../footer/footer.jsp"%>
 </body>
+<script>
+	function isLogin(e){
+		e.preventDefault();
+		//모든 이벤트 중지 후 로그인된 유저인지 판별하기 위해 세션값 획득
+		let session = "<%=sessionId%>";
+		if(session == "null"){
+			alert("글 작성은 로그인 후 이용 가능합니다.");
+			location.href="${pageContext.request.contextPath }/member/login.do";
+		}else{
+			location.href="${pageContext.request.contextPath }/qna/QnaWrite.do";
+		}
+	}
+</script>
 </html>

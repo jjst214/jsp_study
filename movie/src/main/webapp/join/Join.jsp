@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header/header.jsp" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/join.css">
+	<div id="sign-up-form">
 	<form name="joinForm" method="post" 
 	action="${pageContext.request.contextPath }/member/join.do" onsubmit="return validateForm(this)">
 		<table>
+			<tr>
+				<th colspan="2"><h2>Sign Up</h2></th>
+			</tr>
 			<tr>
 				<td>아이디</td>
 				<td>
@@ -57,6 +62,7 @@
 			</tr>
 		</table>
 	</form>
+	</div>
 <%@ include file="../footer/footer.jsp" %>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
